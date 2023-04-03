@@ -8,6 +8,9 @@ public class Hex {
    private int settlementSpacingY;
    ArrayList<Hex> neighbors;
    private boolean isHighlighted;
+   
+   public Hex(){
+   }
 
    public int getX(){
     return x;

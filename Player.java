@@ -11,6 +11,9 @@ public class Player{
     private int cardX;
     private int cardY;
     private Enum mandatorySettlementPhase;
+    
+    public Player(){
+    }
 
     public int getId(){
         return id;

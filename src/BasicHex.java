@@ -21,7 +21,12 @@ public class BasicHex extends Hex{
     }
 
     public boolean isPlacable(){
-        //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        /*used only for checking suitable hexes when placing mandatory settlements because extraaction
+        hexes have their own methods for setting eligible hexes*/
+
+        if(settlement != null){
+            return false;
+        } return true;
     }
 
     public void draw(Graphics g){

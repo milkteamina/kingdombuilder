@@ -2,8 +2,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
 
-
-
+//TODO - 1: Idea: isPlacable() is used only when doing basic settlement stuff
 
 public class Hex {
     public static final int RADIUS = 3;

@@ -9,6 +9,14 @@ public class Settlement {
     private Player owner;
     private BufferedImage image;
 
+    public Settlement(Player player){
+        try{
+            owner = player;
+
+
+        }
+    }
+
     public Player getOwner(){
         return owner;
     }

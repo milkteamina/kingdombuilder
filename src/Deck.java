@@ -7,7 +7,9 @@ import java.awt.image.BufferedImage;
 import java.util.Collections;
 import java.util.Stack;
 import javax.imageio.ImageIO;
+
 public class Deck {
+
     private Stack<TerrainCard> deck;
     private Stack<TerrainCard> discarded;
     private static final int deckX = 100;

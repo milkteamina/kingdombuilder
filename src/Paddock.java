@@ -13,7 +13,7 @@ public class Paddock implements ExtraAction{
     private static final boolean doesItMove = true;
     private BufferedImage image;;
 
-    public void setAvailableMoves(Board board, Player player){
+    public void setAvailableMoves(Board board, Player player, Hex hex){
 
     }
 

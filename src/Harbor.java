@@ -7,32 +7,30 @@ import javax.imageio.ImageIO;
 
 public class Harbor implements ExtraAction{
 
+    private static final boolean doesItMove = true;
+    private static final String extraActionType = "harbor";
+
     private int x;
     private int y;
     private boolean isUsed;
-    private static final boolean doesItMove = true;
-    private BufferedImage image;;
+    private BufferedImage image;
 
-    public void setAvailableMoves(Board board, Player player){
+    public void setAvailableMoves(Board board, Player player, Hex hex){
 
     }
 
-    @Override
     public void draw(Graphics g) {
 
     }
 
-    @Override
     public boolean isUsed() {
         return isUsed;
     }
 
-    @Override
     public boolean doesItMove() {
         return doesItMove;
     }
 
-    @Override
     public void reset() {
         isUsed = false;
     }

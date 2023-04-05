@@ -1,10 +1,14 @@
+import java.awt.*;
 import java.util.ArrayList;
+import javax.swing.*;
 
 public class ExtraActionHex extends Hex {
     private boolean[] adjacentPlayers;
     private ArrayList<ExtraAction> extraActions;
-    //could be useful
-    private String extraActionType;
+    private String extraActionType; //could be useful
+
+    private static final int extraActionSpacingX = 1;
+    private static final int extraActionSpacingY = 1;
 
 
     public ExtraActionHex(int x, int y, ArrayList<Hex> neighbors, String extraActionType) {
@@ -19,8 +23,8 @@ public class ExtraActionHex extends Hex {
 
         switch (extraActionType) {
             case "harbor" -> {
-                extraActions.add(new Harbor());
-                extraActions.add(new Harbor());
+                extraActions.add(new Harbor(getX() + extraActionSpacingX, getY() + extraActionSpacingY));
+                extraActions.add(new Harbor(getX() + extraActionSpacingX, getY() + extraActionSpacingY));
             }
             case "oasis" -> {
                 extraActions.add(new Oasis());
@@ -37,6 +41,12 @@ public class ExtraActionHex extends Hex {
         }
     }
 
+    public void draw(Graphics g){
+        super.draw(g);
+        for(int i = 0; i < extraActions.size(); i++){
+            extraActions.get(i).draw(g);
+        }
+    }
     public boolean isDepleted() {
         return extraActions.size() == 0;
     }
@@ -51,7 +61,7 @@ public class ExtraActionHex extends Hex {
 
     public boolean hasMovedAway(Player player) {
         //scuffed af
-        if(adjacentPlayers[player.getId()]){
+        if(hasGivenToPlayer(player)){
             for(Hex h : super.getNeighbors()){
                 if(h.getSettlement() != null && h.getSettlement().getOwner().getId() == player.getId()){
                     return false;

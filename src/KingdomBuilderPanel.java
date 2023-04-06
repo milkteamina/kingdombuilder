@@ -14,12 +14,16 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
     private int objectiveCardSpacing;
 
     public KingdomBuilderPanel() {
-
+         try{
+           background = ImageIO.read(KingdomBuilderPanel.class.getResource("/Image/background.png");
+        } catch(Exception e){
+            System.out.println(e);
+        }
     }
 
     public void paint(Graphics g) {
         g.clearRect(0, 0, getWidth(), getHeight()); //so panel doesn't get fucked up
-
+        g.drawImage(background, 0, 0, null);
     }
 
     public void drawObjectiveCards(Graphics g) {

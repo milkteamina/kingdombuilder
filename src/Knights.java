@@ -7,6 +7,9 @@ import javax.imageio.ImageIO;
 
 
 public class Knights implements ObjectiveCard{
+
+    private static final int SIZEX = 10;
+
     private int x;
     private int y;
     private BufferedImage cardFace;

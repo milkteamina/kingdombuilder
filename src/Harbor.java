@@ -5,10 +5,13 @@ import javax.swing.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
+
+//just modding Harbor right now.
 public class Harbor implements ExtraAction{
 
     private static final boolean doesItMove = true;
     private static final String extraActionType = "harbor";
+    private static final int size = 6;
 
     private int x;
     private int y;
@@ -32,7 +35,7 @@ public class Harbor implements ExtraAction{
     }
 
     public void draw(Graphics g) {
-
+        g.drawImage(image, x, y, size, size, null);
     }
 
     public boolean isUsed() {

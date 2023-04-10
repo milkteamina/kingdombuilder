@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -7,8 +8,8 @@ public class BasicHex extends Hex{
     private String terrainType;
     private Settlement settlement;
 
-    public BasicHex(int x, int y, ArrayList<Hex> neighbors, String terrainType){
-        super(x, y, neighbors);
+    public BasicHex(int[] pointsX, int[] pointsY, ArrayList<Hex> neighbors, String terrainType){
+        super(pointsX, pointsY, neighbors);
         this.terrainType = terrainType;
     }
 
@@ -29,7 +30,7 @@ public class BasicHex extends Hex{
 
     public void draw(Graphics g){
         if(settlement != null){
-            settlement.draw(g, super.getX() + super.getSettlementSpacingX(), super.getY() + super.getSettlementSpacingY());
+            settlement.draw(g, super.getPointsX()[0] + super.getSettlementSpacingX(), super.getPointsY()[0] + super.getSettlementSpacingY());
         }
     }
 }

@@ -7,12 +7,13 @@ public class ExtraActionHex extends Hex {
     private ArrayList<ExtraAction> extraActions;
     private String extraActionType; //could be useful
 
-    private static final int extraActionSpacingX = 1;
-    private static final int extraActionSpacingY = 1;
+    //negatives because points from Hex are on the hexagon but draw image doesn't like that.
+    private static final int extraActionSpacingX = -1;
+    private static final int extraActionSpacingY = -1;
 
 
-    public ExtraActionHex(int x, int y, ArrayList<Hex> neighbors, String extraActionType) {
-        super(x, y, neighbors);
+    public ExtraActionHex(int[] pointsX, int[] pointsY, ArrayList<Hex> neighbors, String extraActionType) {
+        super(pointsX, pointsY, neighbors);
         this.extraActionType = extraActionType;
         adjacentPlayers = new boolean[6];
         extraActions = new ArrayList<>();
@@ -23,8 +24,8 @@ public class ExtraActionHex extends Hex {
 
         switch (extraActionType) {
             case "harbor" -> {
-                extraActions.add(new Harbor(getX() + extraActionSpacingX, getY() + extraActionSpacingY));
-                extraActions.add(new Harbor(getX() + extraActionSpacingX, getY() + extraActionSpacingY));
+                extraActions.add(new Harbor(getPointsX()[0] + extraActionSpacingX, getPointsY()[0] + extraActionSpacingY));
+                extraActions.add(new Harbor(getPointsX()[0] + extraActionSpacingX, getPointsY()[0] + extraActionSpacingY));
             }
             case "oasis" -> {
                 extraActions.add(new Oasis());

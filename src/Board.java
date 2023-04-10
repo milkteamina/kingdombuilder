@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.io.*;
 import javax.swing.*;
 
@@ -9,6 +10,21 @@ import javax.imageio.ImageIO;
 public class Board {
 
     public static final int BOARD_SIZE = 200;
+    private static final int boardX = 10;
+    private static final int boardY = 10;
+
+    private static final int hexagonShiftX = 6;
+    private static final int offSetMarginX = hexagonShiftX / 2;
+    private static final int hexagonShiftY = 4;
+    /*
+    index 0 of these arrays will be the top left corner of the hexagon
+    check these values for accuracy later
+     */
+    private static final int[] startPointsX =
+            {boardX, boardX + hexagonShiftX / 2, boardX + hexagonShiftX, boardX + hexagonShiftX, boardX + hexagonShiftX / 2, boardX};
+    private static final int[] startPointsY =
+            {boardY + 1, boardY, boardY + 1, boardY + hexagonShiftY, boardY + 1 + hexagonShiftY, boardY + hexagonShiftY};
+
     private File boardAsText;
     private ArrayList<Hex> allHexes;
     private Hex[][] hexes;
@@ -16,22 +32,105 @@ public class Board {
     private BufferedImage boardImageQuadrant2;
     private BufferedImage boardImageQuadrant3;
     private BufferedImage boardImageQuadrant4;
-    private int x;
-    private int y;
 
-    //?
-    public Board(File board, int x, int y){
-        try(){
 
+    /*
+    Q1: Oasis
+    Q2: Harbor
+    Q3: Paddock
+    Q4: Tavern
+    0 = desert
+    1 = water
+    2 = mountain
+    3 = flower
+    4 = grass
+    5 = forest
+    6 = canyon
+    7 = oasis
+    8 = city
+    9 = paddock
+    10 = tavern
+    11 = harbor
+     */
+
+    public Board(){
+
+        try{
+            boardAsText = new File("/Boards/defaultBoard.txt");
+            Scanner sc = new Scanner(boardAsText);
+            allHexes = new ArrayList<Hex>();
+            hexes = new Hex[20][40];
+
+            boardImageQuadrant1 = ImageIO.read(Board.class.getResource("/Images/KingdomBuilderBoard_Quadrant1.png"));
+            boardImageQuadrant2 = ImageIO.read(Board.class.getResource("/Images/KingdomBuilderBoard_Quadrant2.png"));
+            boardImageQuadrant3 = ImageIO.read(Board.class.getResource("/Images/KingdomBuilderBoard_Quadrant3.png"));
+            boardImageQuadrant4 = ImageIO.read(Board.class.getResource("/Images/KingdomBuilderBoard_Quadrant4.png"));
+
+            int[] tempPointsX = new int[6];
+            int[] tempPointsY = new int[6];
+
+            for(int i = 0; i < 20; i++){
+                for(int j = 0; j < 40; j += 2){
+
+                    if(i % 2 == 0 && j == 0) j += 1;
+
+                    for (int k = 0; k < 6; k++){
+                        tempPointsX[i] = startPointsX[i] + offSetMarginX * (i % 2) + hexagonShiftX * j / 2;
+                        tempPointsY[i] = startPointsY[i] + i * hexagonShiftY;
+                    }
+
+                    switch (sc.next()){
+                        //so it looks like assigning coordinates will absolutely suck. nice.
+                        case "0":
+                            hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null,  "desert");
+                        case "1":
+                            hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "water");
+                        case "2":
+                            hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "mountain");
+                        case "3":
+                            hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "flowers");
+                        case "4":
+                            hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "meadow");
+                        case "5":
+                            hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "forest");
+                        case "6":
+                            hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "canyon");
+                        case "7":
+                            hexes[i][j] = new ExtraActionHex(tempPointsX, tempPointsY, null, "oasis");
+                        case "8":
+                            hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "city");
+                        case "9":
+                            hexes[i][j] = new ExtraActionHex(tempPointsX, tempPointsY, null, "paddock");
+                        case "10":
+                            hexes[i][j] = new ExtraActionHex(tempPointsX, tempPointsY, null, "tavern");
+                        case "11":
+                            hexes[i][j] = new ExtraActionHex(tempPointsX, tempPointsY, null, "harbor");
+                    }
+
+                }
+            }
+
+            //now that the array is filled, we can (attempt to) create the graph based on the array
+
+            for(int i = 0; i < 20; i++){
+                for(int j = 0; j < 40; j += 2){
+
+                }
+            }
+
+        } catch(Exception e){
+            System.out.println(e);
         }
     }
 
     public Hex[] getRow(int row){
-
+        //placeholder for testing
+        return null;
     }
 
     public ArrayList<Hex> getAllHexes(){
-
+        //placeholder for testing
+        return null;
     }
 
     /*a little torn about whether we should make the board image 1 image or multiple.
@@ -39,6 +138,11 @@ public class Board {
     * */
 
     public void drawBoard(Graphics g){
+        g.drawImage(boardImageQuadrant2, x, y, BOARD_SIZE, BOARD_SIZE, null);
+        g.drawImage(boardImageQuadrant1, x + BOARD_SIZE, y, BOARD_SIZE, BOARD_SIZE, null);
+        g.drawImage(boardImageQuadrant3, x, y + BOARD_SIZE, BOARD_SIZE, BOARD_SIZE, null);
+        g.drawImage(boardImageQuadrant4, x + BOARD_SIZE, y + BOARD_SIZE, BOARD_SIZE, BOARD_SIZE, null);
+
 
     }
 

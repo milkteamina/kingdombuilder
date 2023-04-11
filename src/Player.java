@@ -44,11 +44,13 @@ public class Player {
     }
 
     public ExtraAction extraActionClicked(int mouseX, int mouseY){
-
+        //placeholder for testing
+        return null;
     }
 
     public boolean mandatorySettlementsClicked(int mouseX, int mouseY){
-
+        //placeholder for testing
+        return false;
     }
 
     public void resetExtraActions(){

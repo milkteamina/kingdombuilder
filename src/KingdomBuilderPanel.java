@@ -23,7 +23,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
 
     public void paint(Graphics g) {
         g.clearRect(0, 0, getWidth(), getHeight()); //so panel doesn't get fucked up
-        g.drawImage(background, 0, 0, null);
+        g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
     }
 
     public void drawObjectiveCards(Graphics g) {

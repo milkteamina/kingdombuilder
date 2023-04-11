@@ -96,6 +96,10 @@ public class Hex {
         return settlement;
     }
 
+    public String debugType(){
+        return "extra action or castle";
+    }
+
 }
 
 /*

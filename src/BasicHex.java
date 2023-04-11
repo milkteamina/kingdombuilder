@@ -33,4 +33,8 @@ public class BasicHex extends Hex{
             settlement.draw(g, super.getPointsX()[0] + super.getSettlementSpacingX(), super.getPointsY()[0] + super.getSettlementSpacingY());
         }
     }
+
+    public String debugType() {
+        return terrainType;
+    }
 }

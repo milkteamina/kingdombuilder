@@ -33,6 +33,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
             g.clearRect(0, 0, getWidth(), getHeight()); //so panel doesn't get fucked up
             g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
             b.drawBoard(g);
+
+            System.out.println(b.debugString());
         }
     }
 

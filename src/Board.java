@@ -8,9 +8,11 @@ import javax.imageio.ImageIO;
 
 public class Board {
 
-    public static final int BOARD_QUADRANT_SIZE = 100;
+    public static final int BOARD_QUADRANT_SIZE = 300;
     private static final int boardX = 10;
     private static final int boardY = 10;
+    private static final int boardAdjustX = 14;
+    private static final int boardAdjustY = 9;
 
     private static final int hexagonShiftX = 6;
     private static final int offSetMarginX = hexagonShiftX / 2;
@@ -22,7 +24,7 @@ public class Board {
     private static final int[] startPointsX =
             {boardX, boardX + hexagonShiftX / 2, boardX + hexagonShiftX, boardX + hexagonShiftX, boardX + hexagonShiftX / 2, boardX};
     private static final int[] startPointsY =
-            {boardY + 1, boardY, boardY + 1, boardY + hexagonShiftY, boardY + 1 + hexagonShiftY, boardY + hexagonShiftY};
+            {boardY + 3, boardY, boardY + 3, boardY + hexagonShiftY, boardY + 3 + hexagonShiftY, boardY + hexagonShiftY};
 
     private File boardAsText;
     private ArrayList<Hex> allHexes;
@@ -55,7 +57,7 @@ public class Board {
     public Board(){
         System.out.println("board constructed");
         try{
-            //WHY IS THIS NOT WORKING WHAT THE FYCJ
+
             boardAsText = new File("src/Boards/defaultBoard.txt");
             Scanner sc = new Scanner(boardAsText);
             allHexes = new ArrayList<Hex>();
@@ -72,15 +74,15 @@ public class Board {
             for(int i = 0; i < 20; i++){
                 for(int j = 0; j < 40; j += 2){
 
-                    if(i % 2 == 0 && j == 0) j += 1;
+                    if(i % 2 == 1 && j == 0) j += 1;
 
                     for (int k = 0; k < 6; k++){
-                        tempPointsX[i] = startPointsX[i] + offSetMarginX * (i % 2) + hexagonShiftX * j / 2;
-                        tempPointsY[i] = startPointsY[i] + i * hexagonShiftY;
+                        tempPointsX[k] = startPointsX[k] + offSetMarginX * (i % 2) + hexagonShiftX * j / 2;
+                        tempPointsY[k] = startPointsY[k] + i * hexagonShiftY;
                     }
 
                     switch (sc.next()){
-                        //so it looks like assigning coordinates will absolutely suck. nice.
+                        //TODO: make sure switch case is working. This might be related to reading in the file.
                         case "0":
                             hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null,  "desert");
                         case "1":
@@ -118,62 +120,66 @@ public class Board {
             {0, 5, 0, 6, 0, 7, 0},
             {7, 0, 8, 0, 9, 0, 10}
             }
+            TODO: review logic on if statements cause it looks kinda wonky
             */
 
             ArrayList<Hex> tempNeighbors;
 
             for(int i = 0; i < 20; i++){
                 for(int j = 0; j < 40; j += 2){
+
+                    if(i % 2 == 1 && j == 0) j += 1;
+
                     tempNeighbors = new ArrayList<Hex>();
 
                     if(i - 1 < hexes.length && i - 1 > 0 &&
                             j - 1 < hexes[i].length && j - 1 > 0){
                         tempNeighbors.add(hexes[i - 1][j - 1]);
-                        System.out.println("yes");
+//                        System.out.println("yes");
                     } else{
                         //don't know if we should add null or add a hex that says "nothing"
                       tempNeighbors.add(null);
-                        System.out.println("no");
+//                        System.out.println("no");
                     }
                     if(i - 1 < hexes.length && i - 1 > 0 &&
                             j + 1 < hexes[i].length && j + 1 > 0){
                         tempNeighbors.add(hexes[i - 1][j + 1]);
-                        System.out.println("yes");
+//                        System.out.println("yes");
                     } else{
                         tempNeighbors.add(null);
-                        System.out.println("no");
+//                        System.out.println("no");
                     }
                     if(i < hexes.length && i > 0 &&
                             j + 2 < hexes[i].length && j + 2 > 0){
                         tempNeighbors.add(hexes[i][j + 2]);
-                        System.out.println("yes");
+//                        System.out.println("yes");
                     } else{
                         tempNeighbors.add(null);
-                        System.out.println("no");
+//                        System.out.println("no");
                     }
                     if(i + 1 < hexes.length && i + 1 > 0 &&
                             j + 1 < hexes[i].length && j + 1 > 0){
                         tempNeighbors.add(hexes[i + 1][j + 1]);
-                        System.out.println("yes");
+//                        System.out.println("yes");
                     } else{
                         tempNeighbors.add(null);
-                        System.out.println("no");
+//                        System.out.println("no");
                     }
                     if(i + 1 < hexes.length && i + 1 > 0 &&
                             j - 1 < hexes[i].length && j - 1 > 0){
                         tempNeighbors.add(hexes[i + 1][j - 1]);
-                        System.out.println("yes");
+//                        System.out.println("yes");
                     } else{
                         tempNeighbors.add(null);
-                        System.out.println("no");
+//                        System.out.println("no");
                     }
                     if(i < hexes.length && i > 0 &&
                             j - 2 < hexes[i].length && j - 2 > 0){
                         tempNeighbors.add(hexes[i][j - 2]);
-                        System.out.println("yes");
+//                        System.out.println("yes");
                     } else{
                         tempNeighbors.add(null);
-                        System.out.println("no");
+//                        System.out.println("no");
                     }
 
                     hexes[i][j].setNeighbors(tempNeighbors);
@@ -194,6 +200,15 @@ public class Board {
         return allHexes;
     }
 
+    public StringBuilder debugString(){
+        StringBuilder s = new StringBuilder("");
+
+        for(Hex h : allHexes){
+            s.append(h.debugType() + " ");
+        }
+        return s;
+    }
+
     /*a little torn about whether we should make the board image 1 image or multiple.
     * Leaning to multiple for now.
     * */
@@ -201,16 +216,14 @@ public class Board {
     public void drawBoard(Graphics g){
         //draw image of board
         g.drawImage(boardImageQuadrant2, boardX, boardY, BOARD_QUADRANT_SIZE, BOARD_QUADRANT_SIZE, null);
-        g.drawImage(boardImageQuadrant1, boardX + BOARD_QUADRANT_SIZE, boardY, BOARD_QUADRANT_SIZE, BOARD_QUADRANT_SIZE, null);
-        g.drawImage(boardImageQuadrant3, boardX, boardY + BOARD_QUADRANT_SIZE, BOARD_QUADRANT_SIZE, BOARD_QUADRANT_SIZE, null);
-        g.drawImage(boardImageQuadrant4, boardX + BOARD_QUADRANT_SIZE, boardY + BOARD_QUADRANT_SIZE, BOARD_QUADRANT_SIZE, BOARD_QUADRANT_SIZE, null);
+        g.drawImage(boardImageQuadrant1, boardX + BOARD_QUADRANT_SIZE - boardAdjustX, boardY, BOARD_QUADRANT_SIZE, BOARD_QUADRANT_SIZE, null);
+        g.drawImage(boardImageQuadrant3, boardX, boardY + BOARD_QUADRANT_SIZE - boardAdjustY, BOARD_QUADRANT_SIZE, BOARD_QUADRANT_SIZE, null);
+        g.drawImage(boardImageQuadrant4, boardX + BOARD_QUADRANT_SIZE - boardAdjustX, boardY + BOARD_QUADRANT_SIZE - boardAdjustY, BOARD_QUADRANT_SIZE, BOARD_QUADRANT_SIZE, null);
 
         //draw highlighted hexes
         for(int i = 0; i < allHexes.size(); i++){
             allHexes.get(0).draw(g);
         }
-
-
     }
 
 

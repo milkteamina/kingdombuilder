@@ -20,11 +20,11 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
 
     public KingdomBuilderPanel() {
          try{
-           background = ImageIO.read(KingdomBuilderPanel.class.getResource("/Image/background.png");
-           miners = ImageIO.read(KingdomBuilderPanel.class.getResource("/Image/KB-miners.png");
-           knights = ImageIO.read(KingdomBuilderPanel.class.getResource("/Image/KB-knights.png");
-           merchants = ImageIO.read(KingdomBuilderPanel.class.getResource("/Image/KB-merchants.png");
-           cardBack = ImageIO.read(KingdomBuilderPanel.class.getResource("/Image/KB-Card-Back.png");
+           background = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/background.png");
+           miners = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/KB-miners.png");
+           knights = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/KB-knights.png");
+           merchants = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/KB-merchants.png");
+           cardBack = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/KB-Card-Back.png");
         } catch(Exception e){
             System.out.println(e);
         }

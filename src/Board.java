@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 
 public class Board {
 
-    public static final int BOARD_SIZE = 200;
+    public static final int BOARD_QUADRANT_SIZE = 100;
     private static final int boardX = 10;
     private static final int boardY = 10;
 
@@ -175,13 +175,11 @@ public class Board {
     }
 
     public Hex[] getRow(int row){
-        //placeholder for testing
-        return null;
+        return hexes[row];
     }
 
     public ArrayList<Hex> getAllHexes(){
-        //placeholder for testing
-        return null;
+        return allHexes;
     }
 
     /*a little torn about whether we should make the board image 1 image or multiple.
@@ -189,10 +187,16 @@ public class Board {
     * */
 
     public void drawBoard(Graphics g){
-        g.drawImage(boardImageQuadrant2, x, y, BOARD_SIZE, BOARD_SIZE, null);
-        g.drawImage(boardImageQuadrant1, x + BOARD_SIZE, y, BOARD_SIZE, BOARD_SIZE, null);
-        g.drawImage(boardImageQuadrant3, x, y + BOARD_SIZE, BOARD_SIZE, BOARD_SIZE, null);
-        g.drawImage(boardImageQuadrant4, x + BOARD_SIZE, y + BOARD_SIZE, BOARD_SIZE, BOARD_SIZE, null);
+        //draw image of board
+        g.drawImage(boardImageQuadrant2, boardX, boardY, BOARD_QUADRANT_SIZE, BOARD_QUADRANT_SIZE, null);
+        g.drawImage(boardImageQuadrant1, boardX + BOARD_QUADRANT_SIZE, boardY, BOARD_QUADRANT_SIZE, BOARD_QUADRANT_SIZE, null);
+        g.drawImage(boardImageQuadrant3, boardX, boardY + BOARD_QUADRANT_SIZE, BOARD_QUADRANT_SIZE, BOARD_QUADRANT_SIZE, null);
+        g.drawImage(boardImageQuadrant4, boardX + BOARD_QUADRANT_SIZE, boardY + BOARD_QUADRANT_SIZE, BOARD_QUADRANT_SIZE, BOARD_QUADRANT_SIZE, null);
+
+        //draw highlighted hexes
+        for(int i = 0; i < allHexes.size(); i++){
+            allHexes.get(0).draw(g);
+        }
 
 
     }

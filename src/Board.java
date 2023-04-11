@@ -2,7 +2,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
-import javax.swing.*;
 
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
@@ -54,9 +53,10 @@ public class Board {
      */
 
     public Board(){
-
+        System.out.println("board constructed");
         try{
-            boardAsText = new File("/Boards/defaultBoard.txt");
+            //WHY IS THIS NOT WORKING WHAT THE FYCJ
+            boardAsText = new File("src/Boards/defaultBoard.txt");
             Scanner sc = new Scanner(boardAsText);
             allHexes = new ArrayList<Hex>();
             hexes = new Hex[20][40];
@@ -129,39 +129,51 @@ public class Board {
                     if(i - 1 < hexes.length && i - 1 > 0 &&
                             j - 1 < hexes[i].length && j - 1 > 0){
                         tempNeighbors.add(hexes[i - 1][j - 1]);
+                        System.out.println("yes");
                     } else{
                         //don't know if we should add null or add a hex that says "nothing"
                       tempNeighbors.add(null);
+                        System.out.println("no");
                     }
                     if(i - 1 < hexes.length && i - 1 > 0 &&
                             j + 1 < hexes[i].length && j + 1 > 0){
                         tempNeighbors.add(hexes[i - 1][j + 1]);
+                        System.out.println("yes");
                     } else{
                         tempNeighbors.add(null);
+                        System.out.println("no");
                     }
                     if(i < hexes.length && i > 0 &&
                             j + 2 < hexes[i].length && j + 2 > 0){
                         tempNeighbors.add(hexes[i][j + 2]);
+                        System.out.println("yes");
                     } else{
                         tempNeighbors.add(null);
+                        System.out.println("no");
                     }
                     if(i + 1 < hexes.length && i + 1 > 0 &&
                             j + 1 < hexes[i].length && j + 1 > 0){
                         tempNeighbors.add(hexes[i + 1][j + 1]);
+                        System.out.println("yes");
                     } else{
                         tempNeighbors.add(null);
+                        System.out.println("no");
                     }
                     if(i + 1 < hexes.length && i + 1 > 0 &&
                             j - 1 < hexes[i].length && j - 1 > 0){
                         tempNeighbors.add(hexes[i + 1][j - 1]);
+                        System.out.println("yes");
                     } else{
                         tempNeighbors.add(null);
+                        System.out.println("no");
                     }
                     if(i < hexes.length && i > 0 &&
                             j - 2 < hexes[i].length && j - 2 > 0){
                         tempNeighbors.add(hexes[i][j - 2]);
+                        System.out.println("yes");
                     } else{
                         tempNeighbors.add(null);
+                        System.out.println("no");
                     }
 
                     hexes[i][j].setNeighbors(tempNeighbors);

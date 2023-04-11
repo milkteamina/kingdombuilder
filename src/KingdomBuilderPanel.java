@@ -12,19 +12,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
     private Gamestate g;
     private BufferedImage background;
     private int objectiveCardSpacing;
-    private BufferedImage miners;
-    private BufferedImage knights;
-    private BufferedImage merchants;
-    private BufferedImage cardBack;
     private Deck deck;
 
     public KingdomBuilderPanel() {
          try{
            background = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/background.png");
-           miners = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/KB-miners.png");
-           knights = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/KB-knights.png");
-           merchants = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/KB-merchants.png");
-           cardBack = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/KB-Card-Back.png");
+          
         } catch(Exception e){
             System.out.println(e);
         }
@@ -36,9 +29,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
     }
 
     public void drawObjectiveCards(Graphics g) {
-        g.drawImage(miners, 50, 50, 100, 150, null);
-        g.drawImage(knights, 165, 50, 100, 150, null);
-        g.drawImage(merchants, 280, 50, 100, 150, null);
+        
        
     }
 

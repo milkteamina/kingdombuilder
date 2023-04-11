@@ -16,6 +16,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
     private BufferedImage knights;
     private BufferedImage merchants;
     private BufferedImage cardBack;
+    private Deck deck;
 
     public KingdomBuilderPanel() {
          try{
@@ -46,7 +47,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
     }
 
     public void drawDeck(Graphics g) {
-        g.drawImage(cardBack, 600, 100, 100, 150, null);
+       deck.draw();
        
     }
 

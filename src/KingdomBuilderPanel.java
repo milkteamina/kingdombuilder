@@ -15,7 +15,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
 
     public KingdomBuilderPanel() {
          try{
-           background = ImageIO.read(KingdomBuilderPanel.class.getResource("/Image/background.png");
+           background = ImageIO.read(KingdomBuilderPanel.class.getResource("/Image/background.png"));
         } catch(Exception e){
             System.out.println(e);
         }

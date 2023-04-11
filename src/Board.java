@@ -110,11 +110,62 @@ public class Board {
                 }
             }
 
-            //now that the array is filled, we can (attempt to) create the graph based on the array
+            /*
+            now that the array is filled, we can (attempt to) create the graph based on the array
+            fill the Hex's ArrayList in the same order as its points are stored (top left start then go clockwise)
+            {
+            {1, 0, 2, 0, 3, 0, 4},
+            {0, 5, 0, 6, 0, 7, 0},
+            {7, 0, 8, 0, 9, 0, 10}
+            }
+            */
+
+            ArrayList<Hex> tempNeighbors;
 
             for(int i = 0; i < 20; i++){
                 for(int j = 0; j < 40; j += 2){
+                    tempNeighbors = new ArrayList<Hex>();
 
+                    if(i - 1 < hexes.length && i - 1 > 0 &&
+                            j - 1 < hexes[i].length && j - 1 > 0){
+                        tempNeighbors.add(hexes[i - 1][j - 1]);
+                    } else{
+                        //don't know if we should add null or add a hex that says "nothing"
+                      tempNeighbors.add(null);
+                    }
+                    if(i - 1 < hexes.length && i - 1 > 0 &&
+                            j + 1 < hexes[i].length && j + 1 > 0){
+                        tempNeighbors.add(hexes[i - 1][j + 1]);
+                    } else{
+                        tempNeighbors.add(null);
+                    }
+                    if(i < hexes.length && i > 0 &&
+                            j + 2 < hexes[i].length && j + 2 > 0){
+                        tempNeighbors.add(hexes[i][j + 2]);
+                    } else{
+                        tempNeighbors.add(null);
+                    }
+                    if(i + 1 < hexes.length && i + 1 > 0 &&
+                            j + 1 < hexes[i].length && j + 1 > 0){
+                        tempNeighbors.add(hexes[i + 1][j + 1]);
+                    } else{
+                        tempNeighbors.add(null);
+                    }
+                    if(i + 1 < hexes.length && i + 1 > 0 &&
+                            j - 1 < hexes[i].length && j - 1 > 0){
+                        tempNeighbors.add(hexes[i + 1][j - 1]);
+                    } else{
+                        tempNeighbors.add(null);
+                    }
+                    if(i < hexes.length && i > 0 &&
+                            j - 2 < hexes[i].length && j - 2 > 0){
+                        tempNeighbors.add(hexes[i][j - 2]);
+                    } else{
+                        tempNeighbors.add(null);
+                    }
+
+                    hexes[i][j].setNeighbors(tempNeighbors);
+                    allHexes.add(hexes[i][j]);
                 }
             }
 

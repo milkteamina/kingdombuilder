@@ -36,10 +36,10 @@ public class Board {
 
 
     /*
-    Q1: Oasis
-    Q2: Harbor
-    Q3: Paddock
-    Q4: Tavern
+    Q1: Has oasis
+    Q2: Has harbor
+    Q3: Has paddock
+    Q4: Has tavern
     0 = desert
     1 = water
     2 = mountain
@@ -81,6 +81,7 @@ public class Board {
                         tempPointsY[k] = startPointsY[k] + i * hexagonShiftY;
                     }
 
+                    //so it looks like sc.next() only takes in seven characters and for one line. fuck
                     switch (sc.next()){
                         //TODO: make sure switch case is working. This might be related to reading in the file.
                         case "0":

@@ -13,7 +13,7 @@ public class Miners implements ObjectiveCard{
     private int y;
     private BufferedImage cardFace;
 
-    public Knights(int x2, int y2)
+    public Miners (int x2, int y2)
     {
         try {
             x = x2;

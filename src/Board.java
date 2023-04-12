@@ -28,7 +28,7 @@ public class Board {
 
     private File boardAsText;
     private ArrayList<Hex> allHexes;
-    private Hex[][] hexes;
+    public Hex[][] hexes;
     private BufferedImage boardImageQuadrant1;
     private BufferedImage boardImageQuadrant2;
     private BufferedImage boardImageQuadrant3;
@@ -55,12 +55,11 @@ public class Board {
      */
 
     public Board(){
-        System.out.println("board constructed");
         try{
 
             boardAsText = new File("src/Boards/defaultBoard.txt");
             Scanner sc = new Scanner(boardAsText);
-            allHexes = new ArrayList<Hex>();
+            allHexes = new ArrayList<>();
             hexes = new Hex[20][40];
 
             boardImageQuadrant1 = ImageIO.read(Board.class.getResource("/Images/KingdomBuilderBoard_Quadrant1.png"));
@@ -81,7 +80,7 @@ public class Board {
                         tempPointsY[k] = startPointsY[k] + i * hexagonShiftY;
                     }
 
-                    //so it looks like sc.next() only takes in seven characters and for one line. fuck
+                    //scanner is working
                     switch (sc.next()){
                         //TODO: make sure switch case is working. This might be related to reading in the file.
                         case "0":
@@ -201,14 +200,15 @@ public class Board {
         return allHexes;
     }
 
-    public StringBuilder debugString(){
-        StringBuilder s = new StringBuilder("");
-
-        for(Hex h : allHexes){
-            s.append(h.debugType() + " ");
-        }
-        return s;
-    }
+//    public String debugString(){
+//        String s = "";
+//
+//        for(Hex h : allHexes){
+//            s += h.debugType() + " ";
+//        }
+//
+//        return s;
+//    }
 
     /*a little torn about whether we should make the board image 1 image or multiple.
     * Leaning to multiple for now.

@@ -35,7 +35,4 @@ public class BasicHex extends Hex{
         }
     }
 
-    public String debugType() {
-        return terrainType;
-    }
 }

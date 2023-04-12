@@ -96,8 +96,8 @@ public class Hex {
         return settlement;
     }
 
-    public String debugType(){
-        return "extra action or castle";
+    public String getTerrainType (){
+        return "extra action or castle hex";
     }
 
 }

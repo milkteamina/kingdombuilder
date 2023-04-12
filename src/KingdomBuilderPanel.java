@@ -15,6 +15,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
 
     //testing variables
     private Board b;
+
+    //here because apparently paint paints before construction which is interesting.
     private boolean hasConstructed;
 
     public KingdomBuilderPanel() {
@@ -22,7 +24,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
            background = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/background.png"));
            b = new Board();
            hasConstructed = true;
-           System.out.println("constructed");
         } catch(Exception e){
             System.out.println(e);
         }
@@ -34,7 +35,15 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
             g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
             b.drawBoard(g);
 
-            System.out.println(b.debugString());
+            for(int i = 0; i < 20; i++){
+                for(int j = 0; j < 40; j+=2){
+                    if(i % 2 ==1 && j == 0) j++;
+
+                    //FUCK
+                    System.out.println(b.hexes[i][j].getTerrainType());
+
+                }
+            }
         }
     }
 

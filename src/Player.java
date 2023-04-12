@@ -40,7 +40,18 @@ public class Player {
     }
 
     public void draw(Graphics g){
-
+        //fix placement of all stuff (x and y)
+        g.setColor(Color.WHITE);
+        g.fillRect(100, 500, 300, 200);
+        // figure out how to make it the player's color instead of red
+        g.setColor(Color.RED);
+        // figure out triangle placement (roof of little settlement thing)
+        g.fillPolygon(null, null, 3);
+        g.fillRect(115, 650, 30, 30);
+        g.setColor(Color.BLACK);
+        String k = 40-settlements.size() + "";
+        g.drawString( k, 120, 655);
+        g.drawString("Player" + getId(), 250, 650 );
     }
 
     public ExtraAction extraActionClicked(int mouseX, int mouseY){

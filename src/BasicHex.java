@@ -15,10 +15,11 @@ public class BasicHex extends Hex{
 
     //make sure there are no reference errors
     public void placeSettlement(Settlement s){
+
         settlement = s;
     }
 
-    public String getTerrainType() {
+    public String getType() {
         return terrainType;
     }
 

@@ -9,14 +9,14 @@ import javax.imageio.ImageIO;
 public class Board {
 
     public static final int BOARD_QUADRANT_SIZE = 300;
-    private static final int boardX = 10;
-    private static final int boardY = 10;
+    private static final int boardX = 50;
+    private static final int boardY = 50;
     private static final int boardAdjustX = 14;
     private static final int boardAdjustY = 9;
 
-    private static final int hexagonShiftX = 6;
+    private static final int hexagonShiftX = 30;
     private static final int offSetMarginX = hexagonShiftX / 2;
-    private static final int hexagonShiftY = 4;
+    private static final int hexagonShiftY = 25;
     /*
     index 0 of these arrays will be the top left corner of the hexagon
     check these values for accuracy later
@@ -56,7 +56,7 @@ public class Board {
 
     public Board(){
         try{
-
+            //TODO: make the highlighted hexagons work. could be something to do with the arraylist and the faulty logic
             boardAsText = new File("src/Boards/defaultBoard.txt");
             Scanner sc = new Scanner(boardAsText);
             allHexes = new ArrayList<>();
@@ -80,33 +80,21 @@ public class Board {
                         tempPointsY[k] = startPointsY[k] + i * hexagonShiftY;
                     }
 
-                    //scanner is working
-                    switch (sc.next()){
-                        //TODO: make sure switch case is working. This might be related to reading in the file.
-                        case "0":
-                            hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null,  "desert");
-                        case "1":
-                            hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "water");
-                        case "2":
-                            hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "mountain");
-                        case "3":
-                            hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "flowers");
-                        case "4":
-                            hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "meadow");
-                        case "5":
-                            hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "forest");
-                        case "6":
-                            hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "canyon");
-                        case "7":
-                            hexes[i][j] = new ExtraActionHex(tempPointsX, tempPointsY, null, "oasis");
-                        case "8":
-                            hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "city");
-                        case "9":
-                            hexes[i][j] = new ExtraActionHex(tempPointsX, tempPointsY, null, "paddock");
-                        case "10":
-                            hexes[i][j] = new ExtraActionHex(tempPointsX, tempPointsY, null, "tavern");
-                        case "11":
-                            hexes[i][j] = new ExtraActionHex(tempPointsX, tempPointsY, null, "harbor");
+
+                    String s = sc.next();
+                    switch (s) {
+                        case "0" -> hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "desert");
+                        case "1" -> hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "water");
+                        case "2" -> hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "mountain");
+                        case "3" -> hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "flower");
+                        case "4" -> hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "meadow");
+                        case "5" -> hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "forest");
+                        case "6" -> hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "canyon");
+                        case "7" -> hexes[i][j] = new ExtraActionHex(tempPointsX, tempPointsY, null, "oasis");
+                        case "8" -> hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "city");
+                        case "9" -> hexes[i][j] = new ExtraActionHex(tempPointsX, tempPointsY, null, "paddock");
+                        case "10" -> hexes[i][j] = new ExtraActionHex(tempPointsX, tempPointsY, null, "tavern");
+                        case "11" -> hexes[i][j] = new ExtraActionHex(tempPointsX, tempPointsY, null, "harbor");
                     }
 
                 }
@@ -200,16 +188,6 @@ public class Board {
         return allHexes;
     }
 
-//    public String debugString(){
-//        String s = "";
-//
-//        for(Hex h : allHexes){
-//            s += h.debugType() + " ";
-//        }
-//
-//        return s;
-//    }
-
     /*a little torn about whether we should make the board image 1 image or multiple.
     * Leaning to multiple for now.
     * */
@@ -223,7 +201,8 @@ public class Board {
 
         //draw highlighted hexes
         for(int i = 0; i < allHexes.size(); i++){
-            allHexes.get(0).draw(g);
+            allHexes.get(i).highlight();
+            allHexes.get(i).draw(g);
         }
     }
 

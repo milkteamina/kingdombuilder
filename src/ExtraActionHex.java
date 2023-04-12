@@ -72,7 +72,7 @@ public class ExtraActionHex extends Hex {
         return true;
     }
 
-    public String getExtraActionType(){
+    public String getType(){
         return extraActionType;
     }
 }

@@ -11,7 +11,7 @@ public class Harbor implements ExtraAction{
 
     private static final boolean doesItMove = true;
     private static final String extraActionType = "harbor";
-    private static final int size = 6;
+    private static final int size = 30;
 
     private int x;
     private int y;

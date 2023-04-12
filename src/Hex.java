@@ -20,9 +20,16 @@ public class Hex {
 
     public Hex(int[] pointsX, int[] pointsY, ArrayList<Hex> neighbors){
 
-        this.pointsX = pointsX;
-        this.pointsY = pointsY;
-        this.neighbors = neighbors;
+        this.pointsX = new int[6];
+        this.pointsY = new int[6];
+        //scuffed lol
+        this.neighbors = null;
+
+        for(int i = 0; i < 6; i++){
+            this.pointsX[i] = pointsX[i];
+            this.pointsY[i] = pointsY[i];
+        }
+
 
         isHighlighted = false;
         settlement = null;
@@ -96,8 +103,8 @@ public class Hex {
         return settlement;
     }
 
-    public String getTerrainType (){
-        return "extra action or castle hex";
+    public String getType (){
+        return "nothing";
     }
 
 }

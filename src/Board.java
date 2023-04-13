@@ -11,8 +11,8 @@ public class Board {
     //DO NOT MODIFY THESE CONSTANTS PLEASEEEEEEEEEEEEEEEEEeee
     public static final int BOARD_QUADRANT_SIZE_X = 305;
     public static final int BOARD_QUADRANT_SIZE_Y = 290;
-    private static final int boardX = 50;
-    private static final int boardY = 50;
+    private static final int boardX = 10;
+    private static final int boardY = 800 / 2 - 290 + 50;
     private static final int boardAdjustX = 14;
     private static final int boardAdjustY = 9;
 

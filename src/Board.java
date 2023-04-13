@@ -199,7 +199,8 @@ public class Board {
         g.drawImage(boardImageQuadrant3, boardX, boardY + BOARD_QUADRANT_SIZE - boardAdjustY, BOARD_QUADRANT_SIZE, BOARD_QUADRANT_SIZE, null);
         g.drawImage(boardImageQuadrant4, boardX + BOARD_QUADRANT_SIZE - boardAdjustX, boardY + BOARD_QUADRANT_SIZE - boardAdjustY, BOARD_QUADRANT_SIZE, BOARD_QUADRANT_SIZE, null);
 
-        //draw highlighted hexes
+        //testing highlighted hexes
+        //looks like there's something wrong with the points
         for(int i = 0; i < 1; i++){
             allHexes.get(i).highlight();
             for(int j = 0; j < 6; j++){

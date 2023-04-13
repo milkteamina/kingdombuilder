@@ -20,7 +20,7 @@ public class Player {
     private Enum mandatorySettlementPhase;
 
     public Player(){
-
+        id = 0;
     }
 
     public int getId(){

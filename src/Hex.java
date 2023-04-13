@@ -5,7 +5,7 @@ import javax.swing.*;
 public class Hex {
 
 //    public static final int RADIUS = 3;
-    private static final int settlementSpacingX = 1;
+    private static final int settlementSpacingX = 4;
     private static final int settlementSpacingY = 1;
 
     /*
@@ -57,7 +57,7 @@ public class Hex {
     }
 
     //written by chatGPT lol. Dk if it works but it 99% should.
-    public boolean isPointInsideHexagon(int mouseX, int mouseY) {
+    public boolean isClicked(int mouseX, int mouseY) {
         int intersections = 0;
 
         for (int i = 0; i < pointsX.length; i++) {
@@ -99,6 +99,8 @@ public class Hex {
         return settlementSpacingY;
     }
 
+
+    public void placeSettlement(Settlement s){}
     public Settlement getSettlement(){
         return settlement;
     }

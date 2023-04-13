@@ -198,9 +198,9 @@ public class Board {
         g.drawImage(boardImageQuadrant3, boardX, boardY + BOARD_QUADRANT_SIZE_Y - boardAdjustY, BOARD_QUADRANT_SIZE_X, BOARD_QUADRANT_SIZE_Y, null);
         g.drawImage(boardImageQuadrant4, boardX + BOARD_QUADRANT_SIZE_X - boardAdjustX, boardY + BOARD_QUADRANT_SIZE_Y - boardAdjustY, BOARD_QUADRANT_SIZE_X, BOARD_QUADRANT_SIZE_Y, null);
 
+
         for(int i = 0; i < allHexes.size(); i++){
             allHexes.get(i).draw(g);
-
         }
     }
 

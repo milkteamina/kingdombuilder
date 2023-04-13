@@ -40,18 +40,26 @@ public class Player {
     }
 
     public void draw(Graphics g){
-        //fix placement of all stuff (x and y)
-        g.setColor(Color.WHITE);
-        g.fillRect(100, 500, 300, 200);
-        // figure out how to make it the player's color instead of red
-        g.setColor(Color.RED);
-        // figure out triangle placement (roof of little settlement thing)
-        g.fillPolygon(null, null, 3);
-        g.fillRect(115, 650, 30, 30);
-        g.setColor(Color.BLACK);
-        String k = 40-settlements.size() + "";
-        g.drawString( k, 120, 655);
-        g.drawString("Player" + getId(), 250, 650 );
+       
+       
+           g.setColor(Color.WHITE);
+           g.fillRect(825, 400, 300, 200);
+           g.setFont(new Font("Verdana", Font.PLAIN, 18));
+           g.setColor(Color.BLACK);
+           g.drawString("Player " + getId(), 1000, 575);
+        // make color match player
+           g.setColor(Color.RED);
+   
+    
+           g.fillRect(850, 530, 60, 50);
+           int[] x = {840, 880, 920};
+           int[] y = {540, 500, 540};
+           g.fillPolygon( x, y, 3);
+           g.setColor(Color.WHITE);
+           Font stringFont = new Font( "SansSerif", Font.PLAIN, 40);
+           g.setFont(stringFont);
+           g.drawString(getSettlementsRemaining(), 857, 565);
+
     }
 
     public ExtraAction extraActionClicked(int mouseX, int mouseY){

@@ -40,8 +40,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
                 for(int j = 0; j < 40; j+=2){
                     if(i % 2 ==1 && j == 0) j++;
 
-                    System.out.println(b.hexes[i][j].getType());
-
+//                    System.out.println(b.hexes[i][j].getType());
                 }
             }
 

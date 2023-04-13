@@ -14,9 +14,9 @@ public class Board {
     private static final int boardAdjustX = 14;
     private static final int boardAdjustY = 9;
 
-    private static final int hexagonShiftX = 30;
+    private static final int hexagonShiftX = 24;
     private static final int offSetMarginX = hexagonShiftX / 2;
-    private static final int hexagonShiftY = 25;
+    private static final int hexagonShiftY = 18;
     /*
     index 0 of these arrays will be the top left corner of the hexagon
     check these values for accuracy later
@@ -200,8 +200,11 @@ public class Board {
         g.drawImage(boardImageQuadrant4, boardX + BOARD_QUADRANT_SIZE - boardAdjustX, boardY + BOARD_QUADRANT_SIZE - boardAdjustY, BOARD_QUADRANT_SIZE, BOARD_QUADRANT_SIZE, null);
 
         //draw highlighted hexes
-        for(int i = 0; i < allHexes.size(); i++){
+        for(int i = 0; i < 1; i++){
             allHexes.get(i).highlight();
+            for(int j = 0; j < 6; j++){
+                System.out.println("x:" + allHexes.get(i).getPointsX()[j] + "y:" + allHexes.get(i).getPointsY()[j]);
+            }
             allHexes.get(i).draw(g);
         }
     }

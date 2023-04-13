@@ -38,7 +38,7 @@ public class ScoreCards implements ObjectiveCard{
             {
                 ArrayList<Hex> neighborHexes = x.getNeighbors();
                 for(Hex i : neighborHexes)
-                    if(i.getTerrainType().equals("mountain"))
+                    if(i.getType().equals("mountain"))
                         score += 1;
             }
         }

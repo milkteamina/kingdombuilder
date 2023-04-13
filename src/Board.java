@@ -8,15 +8,17 @@ import javax.imageio.ImageIO;
 
 public class Board {
 
+    //TODO: align the board with the hex grid
     public static final int BOARD_QUADRANT_SIZE = 300;
     private static final int boardX = 50;
     private static final int boardY = 50;
     private static final int boardAdjustX = 14;
     private static final int boardAdjustY = 9;
 
-    private static final int hexagonShiftX = 24;
-    private static final int offSetMarginX = hexagonShiftX / 2;
-    private static final int hexagonShiftY = 18;
+    private static final int hexagonShiftX = 29;
+    private static final int offSetMarginX = hexagonShiftX / 10;
+    private static final int hexagonShiftOffBoardY = 9;
+    private static final int hexagonShiftY = 28;
     /*
     index 0 of these arrays will be the top left corner of the hexagon
     check these values for accuracy later
@@ -24,7 +26,7 @@ public class Board {
     private static final int[] startPointsX =
             {boardX, boardX + hexagonShiftX / 2, boardX + hexagonShiftX, boardX + hexagonShiftX, boardX + hexagonShiftX / 2, boardX};
     private static final int[] startPointsY =
-            {boardY + 3, boardY, boardY + 3, boardY + hexagonShiftY, boardY + 3 + hexagonShiftY, boardY + hexagonShiftY};
+            {boardY + hexagonShiftOffBoardY, boardY, boardY + hexagonShiftOffBoardY, boardY + hexagonShiftY, boardY + hexagonShiftOffBoardY + hexagonShiftY, boardY + hexagonShiftY};
 
     private File boardAsText;
     private ArrayList<Hex> allHexes;
@@ -201,12 +203,13 @@ public class Board {
 
         //testing highlighted hexes
         //looks like there's something wrong with the points
-        for(int i = 0; i < 1; i++){
+        for(int i = 0; i < allHexes.size(); i++){
             allHexes.get(i).highlight();
-            for(int j = 0; j < 6; j++){
-                System.out.println("x:" + allHexes.get(i).getPointsX()[j] + "y:" + allHexes.get(i).getPointsY()[j]);
-            }
+//            for(int j = 0; j < 6; j++){
+//                System.out.println("x:" + allHexes.get(i).getPointsX()[j] + "y:" + allHexes.get(i).getPointsY()[j]);
+//            }
             allHexes.get(i).draw(g);
+            System.out.println(allHexes.get(i).getType());
         }
     }
 

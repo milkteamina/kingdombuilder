@@ -31,6 +31,7 @@ public class BasicHex extends Hex{
     }
 
     public void draw(Graphics g){
+        super.draw(g);
         if(settlement != null){
             settlement.draw(g, super.getPointsX()[0] + super.getSettlementSpacingX(), super.getPointsY()[0] + super.getSettlementSpacingY());
         }

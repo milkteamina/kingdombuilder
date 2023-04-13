@@ -1,4 +1,4 @@
-import java.awt.*;
+ import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -51,7 +51,18 @@ public class ScoreCards implements ObjectiveCard{
     }
     
     public int knightScore(Board board, Player player) {
-        int score = 0;
+        int score = 0; 
+        ArrayList<Hex> allHexes = board.getAllHexes();
+        for(int x = 0; x < 20; x++)
+        {
+            int tempScore = 0;
+            for(int y = 0; x < 20; y++)
+            {
+                if(allHexes.get((x*20)+y).getSettlement().getOwner().getId() == player.getId())
+                    tempScore+=2;
+            }
+            score = Math.max(tempScore, score);
+        }
         return score;
     }
 

@@ -51,7 +51,7 @@ public class Hex {
         isHighlighted = false;
     }
 
-    public boolean isPlacable(){
+    public boolean isSettled(){
         //just exists?
         return false;
     }

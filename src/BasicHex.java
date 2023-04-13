@@ -1,11 +1,10 @@
 import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import javax.swing.*;
 
 public class BasicHex extends Hex{
 
-    private String terrainType;
+    private final String terrainType;
     private Settlement settlement;
 
     public BasicHex(int[] pointsX, int[] pointsY, ArrayList<Hex> neighbors, String terrainType){
@@ -13,9 +12,8 @@ public class BasicHex extends Hex{
         this.terrainType = terrainType;
     }
 
-    //make sure there are no reference errors
     public void placeSettlement(Settlement s){
-
+        //make sure there are no reference errors
         settlement = s;
     }
 
@@ -23,11 +21,8 @@ public class BasicHex extends Hex{
         return terrainType;
     }
 
-    public boolean isPlacable(){
-        /*used only for checking suitable hexes when placing mandatory settlements because ExtraAction
-        hexes have their own methods for setting eligible hexes*/
-
-        return settlement == null;
+    public boolean isSettled(){
+        return settlement != null;
     }
 
     public void draw(Graphics g){

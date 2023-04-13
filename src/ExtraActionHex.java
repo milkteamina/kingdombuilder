@@ -8,8 +8,8 @@ public class ExtraActionHex extends Hex {
     private String extraActionType; //could be useful
 
     //negatives because points from Hex are on the hexagon but draw image doesn't like that.
-    private static final int extraActionSpacingX = 3;
-    private static final int extraActionSpacingY = 3;
+    private static final int extraActionSpacingX = 2;
+    private static final int extraActionSpacingY = 9;
 
 
     public ExtraActionHex(int[] pointsX, int[] pointsY, ArrayList<Hex> neighbors, String extraActionType) {
@@ -28,16 +28,16 @@ public class ExtraActionHex extends Hex {
                 extraActions.add(new Harbor(getPointsX()[0] - extraActionSpacingX, getPointsY()[0] - extraActionSpacingY));
             }
             case "oasis" -> {
-                extraActions.add(new Oasis());
-                extraActions.add(new Oasis());
+                extraActions.add(new Oasis(getPointsX()[0] - extraActionSpacingX, getPointsY()[0] - extraActionSpacingY));
+                extraActions.add(new Oasis(getPointsX()[0] - extraActionSpacingX, getPointsY()[0] - extraActionSpacingY));
             }
             case "paddock" -> {
-                extraActions.add(new Paddock());
-                extraActions.add(new Paddock());
+                extraActions.add(new Paddock(getPointsX()[0] - extraActionSpacingX, getPointsY()[0] - extraActionSpacingY));
+                extraActions.add(new Paddock(getPointsX()[0] - extraActionSpacingX, getPointsY()[0] - extraActionSpacingY));
             }
             case "tavern" -> {
-                extraActions.add(new Tavern());
-                extraActions.add(new Tavern());
+                extraActions.add(new Tavern(getPointsX()[0] - extraActionSpacingX, getPointsY()[0] - extraActionSpacingY));
+                extraActions.add(new Tavern(getPointsX()[0] - extraActionSpacingX, getPointsY()[0] - extraActionSpacingY));
             }
         }
     }

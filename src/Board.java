@@ -29,7 +29,6 @@ public class Board {
     private static final int[] startPointsY =
             {boardY + hexagonShiftOffBoardY, boardY, boardY + hexagonShiftOffBoardY, boardY + hexagonShiftY, boardY + hexagonShiftOffBoardY + hexagonShiftY, boardY + hexagonShiftY};
 
-    private File boardAsText;
     private ArrayList<Hex> allHexes;
     public Hex[][] hexes;
     private BufferedImage boardImageQuadrant1;
@@ -59,8 +58,8 @@ public class Board {
 
     public Board(){
         try{
-            //TODO: make the highlighted hexagons work. could be something to do with the arraylist and the faulty logic
-            boardAsText = new File("src/Boards/defaultBoard.txt");
+
+            File boardAsText = new File("src/Boards/defaultBoard.txt");
             Scanner sc = new Scanner(boardAsText);
             allHexes = new ArrayList<>();
             hexes = new Hex[20][40];
@@ -83,9 +82,7 @@ public class Board {
                         tempPointsY[k] = startPointsY[k] + i * hexagonShiftY;
                     }
 
-
-                    String s = sc.next();
-                    switch (s) {
+                    switch (sc.next()) {
                         case "0" -> hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "desert");
                         case "1" -> hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "water");
                         case "2" -> hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "mountain");
@@ -111,7 +108,6 @@ public class Board {
             {0, 5, 0, 6, 0, 7, 0},
             {7, 0, 8, 0, 9, 0, 10}
             }
-            TODO: review logic on if statements cause it looks kinda wonky
             */
 
             ArrayList<Hex> tempNeighbors;
@@ -121,10 +117,10 @@ public class Board {
 
                     if(i % 2 == 1 && j == 0) j += 1;
 
-                    tempNeighbors = new ArrayList<Hex>();
+                    tempNeighbors = new ArrayList<>();
 
-                    if(i - 1 < hexes.length && i - 1 > 0 &&
-                            j - 1 < hexes[i].length && j - 1 > 0){
+                    if(i - 1 < hexes.length && i - 1 >= 0 &&
+                            j - 1 < hexes[i].length && j - 1 >= 0){
                         tempNeighbors.add(hexes[i - 1][j - 1]);
 //                        System.out.println("yes");
                     } else{
@@ -132,40 +128,40 @@ public class Board {
                       tempNeighbors.add(null);
 //                        System.out.println("no");
                     }
-                    if(i - 1 < hexes.length && i - 1 > 0 &&
-                            j + 1 < hexes[i].length && j + 1 > 0){
+                    if(i - 1 < hexes.length && i - 1 >= 0 &&
+                            j + 1 < hexes[i].length && j + 1 >= 0){
                         tempNeighbors.add(hexes[i - 1][j + 1]);
 //                        System.out.println("yes");
                     } else{
                         tempNeighbors.add(null);
 //                        System.out.println("no");
                     }
-                    if(i < hexes.length && i > 0 &&
-                            j + 2 < hexes[i].length && j + 2 > 0){
+                    if(i < hexes.length && i >= 0 &&
+                            j + 2 < hexes[i].length && j + 2 >= 0){
                         tempNeighbors.add(hexes[i][j + 2]);
 //                        System.out.println("yes");
                     } else{
                         tempNeighbors.add(null);
 //                        System.out.println("no");
                     }
-                    if(i + 1 < hexes.length && i + 1 > 0 &&
-                            j + 1 < hexes[i].length && j + 1 > 0){
+                    if(i + 1 < hexes.length && i + 1 >= 0 &&
+                            j + 1 < hexes[i].length && j + 1 >= 0){
                         tempNeighbors.add(hexes[i + 1][j + 1]);
 //                        System.out.println("yes");
                     } else{
                         tempNeighbors.add(null);
 //                        System.out.println("no");
                     }
-                    if(i + 1 < hexes.length && i + 1 > 0 &&
-                            j - 1 < hexes[i].length && j - 1 > 0){
+                    if(i + 1 < hexes.length && i + 1 >= 0 &&
+                            j - 1 < hexes[i].length && j - 1 >= 0){
                         tempNeighbors.add(hexes[i + 1][j - 1]);
 //                        System.out.println("yes");
                     } else{
                         tempNeighbors.add(null);
 //                        System.out.println("no");
                     }
-                    if(i < hexes.length && i > 0 &&
-                            j - 2 < hexes[i].length && j - 2 > 0){
+                    if(i < hexes.length && i >= 0 &&
+                            j - 2 < hexes[i].length && j - 2 >= 0){
                         tempNeighbors.add(hexes[i][j - 2]);
 //                        System.out.println("yes");
                     } else{
@@ -202,11 +198,9 @@ public class Board {
         g.drawImage(boardImageQuadrant3, boardX, boardY + BOARD_QUADRANT_SIZE_Y - boardAdjustY, BOARD_QUADRANT_SIZE_X, BOARD_QUADRANT_SIZE_Y, null);
         g.drawImage(boardImageQuadrant4, boardX + BOARD_QUADRANT_SIZE_X - boardAdjustX, boardY + BOARD_QUADRANT_SIZE_Y - boardAdjustY, BOARD_QUADRANT_SIZE_X, BOARD_QUADRANT_SIZE_Y, null);
 
-        //testing highlighted hexes
-        //looks like there's something wrong with the points
         for(int i = 0; i < allHexes.size(); i++){
-            allHexes.get(i).highlight();
             allHexes.get(i).draw(g);
+
         }
     }
 

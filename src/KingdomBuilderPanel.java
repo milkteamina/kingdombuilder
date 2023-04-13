@@ -35,14 +35,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
             g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
             b.drawBoard(g);
 
-            //debugging block of code
-            for(int i = 0; i < 20; i++){
-                for(int j = 0; j < 40; j+=2){
-                    if(i % 2 ==1 && j == 0) j++;
-
-//                    System.out.println(b.hexes[i][j].getType());
-                }
-            }
 
         }
     }

@@ -56,7 +56,9 @@ public class Hex {
         return false;
     }
 
-    //written by chatGPT lol. Dk if it works but it 99% should.
+    /*written by chatGPT lol. Dk if it works but it 99% should.
+    update: LMAO IT WORKS PERFECTLY
+    * */
     public boolean isClicked(int mouseX, int mouseY) {
         int intersections = 0;
 

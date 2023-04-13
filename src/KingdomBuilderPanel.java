@@ -23,7 +23,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
          try{
            background = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/background.png"));
            b = new Board();
+           addMouseListener(this);
            hasConstructed = true;
+
         } catch(Exception e){
             System.out.println(e);
         }
@@ -34,7 +36,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
         if(hasConstructed){
             g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
             b.drawBoard(g);
-
 
         }
     }
@@ -51,9 +52,10 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
 
     }
 
-    @Override
     public void mouseClicked(MouseEvent e) {
-        g.playBasedOnState(e.getX(), e.getY());
+//        g.playBasedOnState(e.getX(), e.getY());
+//        b.clickerTester(e.getX(), e.getY());
+//        System.out.println(e.getX() + "" + e.getY());
         repaint();
 
     }

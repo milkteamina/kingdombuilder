@@ -8,8 +8,8 @@ public class ExtraActionHex extends Hex {
     private String extraActionType; //could be useful
 
     //negatives because points from Hex are on the hexagon but draw image doesn't like that.
-    private static final int extraActionSpacingX = -1;
-    private static final int extraActionSpacingY = -1;
+    private static final int extraActionSpacingX = 3;
+    private static final int extraActionSpacingY = 3;
 
 
     public ExtraActionHex(int[] pointsX, int[] pointsY, ArrayList<Hex> neighbors, String extraActionType) {
@@ -24,8 +24,8 @@ public class ExtraActionHex extends Hex {
 
         switch (extraActionType) {
             case "harbor" -> {
-                extraActions.add(new Harbor(getPointsX()[0] + extraActionSpacingX, getPointsY()[0] + extraActionSpacingY));
-                extraActions.add(new Harbor(getPointsX()[0] + extraActionSpacingX, getPointsY()[0] + extraActionSpacingY));
+                extraActions.add(new Harbor(getPointsX()[0] - extraActionSpacingX, getPointsY()[0] - extraActionSpacingY));
+                extraActions.add(new Harbor(getPointsX()[0] - extraActionSpacingX, getPointsY()[0] - extraActionSpacingY));
             }
             case "oasis" -> {
                 extraActions.add(new Oasis());

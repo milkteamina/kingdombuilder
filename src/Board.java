@@ -8,8 +8,9 @@ import javax.imageio.ImageIO;
 
 public class Board {
 
-    //TODO: align the board with the hex grid
-    public static final int BOARD_QUADRANT_SIZE = 300;
+    //DO NOT MODIFY THESE CONSTANTS PLEASEEEEEEEEEEEEEEEEEeee
+    public static final int BOARD_QUADRANT_SIZE_X = 305;
+    public static final int BOARD_QUADRANT_SIZE_Y = 290;
     private static final int boardX = 50;
     private static final int boardY = 50;
     private static final int boardAdjustX = 14;
@@ -196,20 +197,16 @@ public class Board {
 
     public void drawBoard(Graphics g){
         //draw image of board
-        g.drawImage(boardImageQuadrant2, boardX, boardY, BOARD_QUADRANT_SIZE, BOARD_QUADRANT_SIZE, null);
-        g.drawImage(boardImageQuadrant1, boardX + BOARD_QUADRANT_SIZE - boardAdjustX, boardY, BOARD_QUADRANT_SIZE, BOARD_QUADRANT_SIZE, null);
-        g.drawImage(boardImageQuadrant3, boardX, boardY + BOARD_QUADRANT_SIZE - boardAdjustY, BOARD_QUADRANT_SIZE, BOARD_QUADRANT_SIZE, null);
-        g.drawImage(boardImageQuadrant4, boardX + BOARD_QUADRANT_SIZE - boardAdjustX, boardY + BOARD_QUADRANT_SIZE - boardAdjustY, BOARD_QUADRANT_SIZE, BOARD_QUADRANT_SIZE, null);
+        g.drawImage(boardImageQuadrant2, boardX, boardY, BOARD_QUADRANT_SIZE_X, BOARD_QUADRANT_SIZE_Y, null);
+        g.drawImage(boardImageQuadrant1, boardX + BOARD_QUADRANT_SIZE_X - boardAdjustX, boardY, BOARD_QUADRANT_SIZE_X, BOARD_QUADRANT_SIZE_Y, null);
+        g.drawImage(boardImageQuadrant3, boardX, boardY + BOARD_QUADRANT_SIZE_Y - boardAdjustY, BOARD_QUADRANT_SIZE_X, BOARD_QUADRANT_SIZE_Y, null);
+        g.drawImage(boardImageQuadrant4, boardX + BOARD_QUADRANT_SIZE_X - boardAdjustX, boardY + BOARD_QUADRANT_SIZE_Y - boardAdjustY, BOARD_QUADRANT_SIZE_X, BOARD_QUADRANT_SIZE_Y, null);
 
         //testing highlighted hexes
         //looks like there's something wrong with the points
         for(int i = 0; i < allHexes.size(); i++){
             allHexes.get(i).highlight();
-//            for(int j = 0; j < 6; j++){
-//                System.out.println("x:" + allHexes.get(i).getPointsX()[j] + "y:" + allHexes.get(i).getPointsY()[j]);
-//            }
             allHexes.get(i).draw(g);
-            System.out.println(allHexes.get(i).getType());
         }
     }
 

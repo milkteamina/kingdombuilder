@@ -5,9 +5,7 @@ import javax.swing.*;
 public class ExtraActionHex extends Hex {
     private boolean[] adjacentPlayers;
     private ArrayList<ExtraAction> extraActions;
-    private String extraActionType; //could be useful
-
-    //negatives because points from Hex are on the hexagon but draw image doesn't like that.
+    private String extraActionType;
     private static final int extraActionSpacingX = 2;
     private static final int extraActionSpacingY = 9;
 

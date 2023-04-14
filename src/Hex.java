@@ -4,7 +4,6 @@ import javax.swing.*;
 
 public class Hex {
 
-//    public static final int RADIUS = 3;
     private static final int settlementSpacingX = 4;
     private static final int settlementSpacingY = 1;
 
@@ -47,7 +46,7 @@ public class Hex {
         isHighlighted = true;
     }
 
-    public void unHighlights(){
+    public void unHighlight(){
         isHighlighted = false;
     }
 
@@ -81,7 +80,6 @@ public class Hex {
         return neighbors;
     }
 
-    //this is done because of java reference
     public void setNeighbors(ArrayList<Hex> n){
         neighbors = new ArrayList<>(n);
     }
@@ -113,23 +111,5 @@ public class Hex {
 
 }
 
-/*
-    public static boolean isPointInsidePolygon(int vertexCount, float[] vertexX, float[] vertexY, float testX, float testY)
-    {
-        boolean c = false;
-        for (int i = 0, j = vertexCount - 1; i < vertexCount; j = i++)
-        {
-            if (((vertexY[i] > testY) != (vertexY[j] > testY))
-                    && (testX < (vertexX[j] - vertexX[i]) * (testY - vertexY[i]) / (vertexY[j] - vertexY[i]) + vertexX[i]))
-                c = !c;
-        }
-        return c;
-    }
-
-    public boolean isClicked(int mouseX, int mouseY){
-        return Math.sqrt(Math.pow((x + RADIUS - mouseX), 2) + Math.pow((y + RADIUS - mouseY), 2)) < RADIUS;
-    }
-
- */
 
 

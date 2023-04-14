@@ -6,21 +6,31 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 public class Player {
+
+    private static final int extraActionSpacingX = 0;
+    private static final int extraActionSpacingY = 0;
+    private static final int mandatorySettlementsButtonX = 0;
+    private static final int mandatorySettlementsButtonY = 0;
+    private static final int cardX = 0;
+    private static final int cardY = 0;
+    private int id;
     private ArrayList<Settlement> settlements;
     private ArrayList<ExtraAction> extraActions;
     private TerrainCard card;
-    private int id;
     private int score;
-    private int extraActionSpacingX;
-    private int extraActionSpacingY;
-    private int mandatorySettlementsButtonX;
-    private int mandatorySettlementsButtonY;
-    private int cardX;
-    private int cardY;
     private Enum mandatorySettlementPhase;
 
-    public Player(){
-        id = 0;
+    public Player(int id){
+        this.id = id;
+        settlements = new ArrayList<>();
+        
+        for(int i = 0; i < 40; i++){
+            settlements.add(new Settlement(this));
+        }
+        
+        extraActions = new ArrayList<>();
+        int score = 0;
+        mandatorySettlementPhase = MandatorySettlementPhase.hasNotUsed;
     }
 
     public int getId(){
@@ -44,7 +54,7 @@ public class Player {
     }
 
     public ExtraAction extraActionClicked(int mouseX, int mouseY){
-        //placeholder for testing
+        //perhaps we can figure this out w/basic math instead of a with a bunch of methods
         return null;
     }
 

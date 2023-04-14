@@ -42,21 +42,19 @@ public class Player {
     public void draw(Graphics g){
        
        
-           Color c = new Color(245, 229, 193);
-           g.setColor(c);
-           g.fillRect(825, 400, 300, 200);
-           g.setFont(new Font("Verdana", Font.PLAIN, 18));
+           g.setColor(new Color(245, 229, 193));
+           g.fillRoundRect(825, 400, 300, 200, 50, 30);
+           g.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 30));
            g.setColor(Color.BLACK);
            g.drawString("Player " + getId(), 1000, 575);
            if(player.getId() == 0){
-            g.setColor(Color.ORANGE);
+            g.setColor(new Color(242, 122, 10 ));
             } else if(player.getId() == 1){
-            Color o = new Color(200, 66, 245);
-            g.setColor(o);
+            g.setColor(new Color(200, 66, 245));
             } else if(player.getId() == 2){
             g.setColor(Color.BLACK);
             } else if(player.getId() == 3){
-            g.setColor(Color.GRAY);
+            g.setColor(Color.DARK_GRAY);
             }
            g.fillRect(850, 530, 60, 50);
            int[] x = {840, 880, 920};

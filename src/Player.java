@@ -57,6 +57,10 @@ public class Player {
         }
     }
 
+    public void setCard(TerrainCard c){
+        card = c;
+    }
+
     public void draw(Graphics g){
 
     }

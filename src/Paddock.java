@@ -36,6 +36,10 @@ public class Paddock implements ExtraAction{
         g.drawImage(image, x, y, sizeX, sizeY, null);
     }
 
+    public boolean isClicked(int mouseX, int mouseY){
+        return mouseX > x && mouseX < x + sizeX && mouseY > y && mouseY < y + sizeY;
+    }
+
     public boolean isUsed() {
         return isUsed;
     }

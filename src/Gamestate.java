@@ -1,3 +1,4 @@
+import java.sql.Array;
 
 public class Gamestate {
 
@@ -18,7 +19,7 @@ public class Gamestate {
 
     }
 
-    public void startGame(){
+    public void newGame(){
 
     }
 

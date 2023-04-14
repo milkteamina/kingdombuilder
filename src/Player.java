@@ -9,6 +9,8 @@ public class Player {
 
     private static final int extraActionSpacingX = 0;
     private static final int extraActionSpacingY = 0;
+
+    private static final int mandatorySettlementButtonSize = 50;
     private static final int mandatorySettlementsButtonX = 0;
     private static final int mandatorySettlementsButtonY = 0;
     private static final int cardX = 0;
@@ -49,18 +51,29 @@ public class Player {
         return settlements.size();
     }
 
+    public void placeSettlement(Hex h){
+        if(getSettlementsRemaining() > 0){
+            h.placeSettlement(settlements.remove(0));
+        }
+    }
+
     public void draw(Graphics g){
 
     }
 
     public ExtraAction extraActionClicked(int mouseX, int mouseY){
         //perhaps we can figure this out w/basic math instead of with a bunch of methods
+        for(int i = 0; i < extraActions.size(); i++){
+            if(extraActions.get(i).isClicked(mouseX, mouseY)) return extraActions.get(i);
+        }
+
         return null;
+
     }
 
     public boolean mandatorySettlementsClicked(int mouseX, int mouseY){
-        //placeholder for testing
-        return false;
+        return mouseX > mandatorySettlementsButtonX && mouseX < mandatorySettlementsButtonX + mandatorySettlementButtonSize &&
+                mouseY > mandatorySettlementsButtonY && mouseY < mandatorySettlementsButtonY + mandatorySettlementButtonSize;
     }
 
     public void resetExtraActions(){

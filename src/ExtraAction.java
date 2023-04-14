@@ -9,5 +9,6 @@ public interface ExtraAction {
     boolean isUsed();
     boolean doesItMove();
     void reset();
+    boolean isClicked(int mouseX, int mouseY);
 
 }

@@ -13,12 +13,12 @@ public class Player {
     private static final int mandatorySettlementsButtonY = 0;
     private static final int cardX = 0;
     private static final int cardY = 0;
-    private int id;
+    private final int id;
     private ArrayList<Settlement> settlements;
     private ArrayList<ExtraAction> extraActions;
     private TerrainCard card;
     private int score;
-    private Enum mandatorySettlementPhase;
+    private MandatorySettlementPhase mandatorySettlementPhase;
 
     public Player(int id){
         this.id = id;
@@ -54,7 +54,7 @@ public class Player {
     }
 
     public ExtraAction extraActionClicked(int mouseX, int mouseY){
-        //perhaps we can figure this out w/basic math instead of a with a bunch of methods
+        //perhaps we can figure this out w/basic math instead of with a bunch of methods
         return null;
     }
 
@@ -69,12 +69,12 @@ public class Player {
         }
     }
 
-    public Enum getMandatorySettlementPhase(){
+    public MandatorySettlementPhase getMandatorySettlementPhase(){
         return mandatorySettlementPhase;
     }
 
-    public void setMandatorySettlementPhase(Enum e){
-        mandatorySettlementPhase = e;
+    public void setMandatorySettlementPhase(MandatorySettlementPhase p){
+        mandatorySettlementPhase = p;
     }
 
 

@@ -51,7 +51,7 @@ public class ExtraActionHex extends Hex {
     }
 
     public void giveExtraAction(Player player) {
-        //TODO
+
     }
 
     public boolean hasGivenToPlayer(Player player) {

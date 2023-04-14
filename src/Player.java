@@ -42,7 +42,8 @@ public class Player {
     public void draw(Graphics g){
        
        
-           g.setColor(Color.WHITE);
+           Color c = new Color(245, 229, 193);
+           g.setColor(c);
            g.fillRect(825, 400, 300, 200);
            g.setFont(new Font("Verdana", Font.PLAIN, 18));
            g.setColor(Color.BLACK);

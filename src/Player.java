@@ -48,10 +48,16 @@ public class Player {
            g.setFont(new Font("Verdana", Font.PLAIN, 18));
            g.setColor(Color.BLACK);
            g.drawString("Player " + getId(), 1000, 575);
-        // make color match player
-           g.setColor(Color.RED);
-   
-    
+           if(player.getId() == 0){
+            g.setColor(Color.ORANGE);
+            } else if(player.getId() == 1){
+            Color o = new Color(200, 66, 245);
+            g.setColor(o);
+            } else if(player.getId() == 2){
+            g.setColor(Color.BLACK);
+            } else if(player.getId() == 3){
+            g.setColor(Color.GRAY);
+            }
            g.fillRect(850, 530, 60, 50);
            int[] x = {840, 880, 920};
            int[] y = {540, 500, 540};

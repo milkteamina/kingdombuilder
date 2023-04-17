@@ -52,7 +52,7 @@ public class Hex {
 
     public boolean isSettled(){
         //just exists?
-        return false;
+        return true;
     }
 
     /*written by chatGPT lol. Dk if it works but it 99% should.

@@ -13,7 +13,7 @@ public class Gamestate {
     private boolean isEnding;
     private boolean gameOver;
     private int mandatorySettlementsInARow;
-//    private ExtraAction movingExtraActionToUse;
+    private ExtraAction movingExtraActionToUse;
 
     public Gamestate(){
         players = new Player[4];
@@ -37,24 +37,25 @@ public class Gamestate {
         turn = startingPlayer;
         isEnding = false;
         gameOver = false;
-        gameState = 1;
+        gameState = 0;
         //set message before each state occurs
         message = "Click on either an extra-action or the mandatory settlements";
     }
 
     public void playBasedOnState(int mouseX, int mouseY) {
-        /*
-        pseudocoding this shit for now cause
-        im thinking about modding the gameplay system
-        gamestate
-        */
 
         switch(gameState){
-            case 1 -> {
-                if(players[turn].extraActionClicked(mouseX, mouseY) != null)
+            case 0 -> {
+                if(players[turn].extraActionClicked(mouseX, mouseY) != null &&
+                players[turn].extraActionClicked(mouseX, mouseY).doesItMove())
                 {
                     //players[turn].extraActionClicked(mouseX, mouseY).doExtraAction(this, ?, ?);
-                    //setting gamestates here should not be neccesary
+                    movingExtraActionToUse = players[turn].extraActionClicked(mouseX, mouseY).copy();
+                    gameState = 2;
+                } else if(players[turn].extraActionClicked(mouseX, mouseY) != null &&
+                        !players[turn].extraActionClicked(mouseX, mouseY).doesItMove())
+                {
+
                 }
                 else if(players[turn].mandatorySettlementsClicked(mouseX, mouseY) &&
                         players[turn].getMandatorySettlementPhase().equals(MandatorySettlementPhase.hasNotUsed))
@@ -62,8 +63,9 @@ public class Gamestate {
                     players[turn].setMandatorySettlementPhase(MandatorySettlementPhase.isUsing);
                     //board.setMandatorySettlementHexes(Player p);
                 }
+                message = "Click which settlement you would like to move";
             }
-            case 2 ->{
+            case 1 ->{
                 message =
             }
         }

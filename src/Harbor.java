@@ -72,5 +72,11 @@ public class Harbor implements ExtraAction{
         return y;
     }
 
+    public ExtraAction copy() {
+        /*because the ExtraAction will be used for setting purposes
+         making its coords messed up should do no harm
+         */
+        return new Harbor(-1, -1);
+    }
 
 }

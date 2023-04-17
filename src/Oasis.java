@@ -28,7 +28,7 @@ public class Oasis implements ExtraAction{
         }
 
     }
-    public void setAvailableMoves(Board board, Player player){
+    public void setAvailableMoves(Board board, Player player, Hex hex){
 
     }
 
@@ -73,4 +73,10 @@ public class Oasis implements ExtraAction{
     }
 
 
+    public ExtraAction copy() {
+        /*because the ExtraAction will be used for setting purposes
+         making its coords messed up should do no harm
+         */
+        return new Oasis(-1, -1);
+    }
 }

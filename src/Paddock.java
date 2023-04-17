@@ -73,4 +73,10 @@ public class Paddock implements ExtraAction{
     }
 
 
+    public ExtraAction copy() {
+        /*because the ExtraAction will be used for setting purposes
+         making its coords messed up should do no harm
+         */
+        return new Paddock(-1, -1);
+    }
 }

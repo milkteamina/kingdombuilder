@@ -54,8 +54,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
 
     public void mouseClicked(MouseEvent e) {
 //        g.playBasedOnState(e.getX(), e.getY());
-//        b.clickerTester(e.getX(), e.getY());
-//        System.out.println(e.getX() + "" + e.getY());
         repaint();
 
     }

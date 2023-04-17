@@ -204,6 +204,8 @@ public class Board {
         }
     }
 
+
+
     public void clickerTester(int x, int y){
         for(int i = 0; i < allHexes.size(); i++){
             if(allHexes.get(i).isClicked(x, y)){

@@ -64,6 +64,7 @@ public class Player {
            Font stringFont = new Font( "SansSerif", Font.PLAIN, 40);
            g.setFont(stringFont);
            g.drawString(getSettlementsRemaining(), 857, 565);
+           card.draw(g, 1025, 430);
 
     }
 

@@ -57,6 +57,14 @@ public class Player {
         }
     }
 
+    public void giveExtraAction(ExtraAction extraAction){
+//        ExtraActionHex hex = (ExtraActionHex) h;
+        extraActions.add(extraAction);
+    }
+
+    public TerrainCard getCard(){
+        return card;
+    }
     public void setCard(TerrainCard c){
         card = c;
     }
@@ -66,7 +74,7 @@ public class Player {
     }
 
     public ExtraAction extraActionClicked(int mouseX, int mouseY){
-        //perhaps we can figure this out w/basic math instead of with a bunch of methods
+        //perhaps we can later figure this out w/basic math instead of with a bunch of methods
         for(int i = 0; i < extraActions.size(); i++){
             if(extraActions.get(i).isClicked(mouseX, mouseY)) return extraActions.get(i);
         }

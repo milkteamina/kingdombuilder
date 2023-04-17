@@ -210,6 +210,7 @@ public class Board {
                 allHexes.get(i).highlight();
             }
         }
+
     }
 
 

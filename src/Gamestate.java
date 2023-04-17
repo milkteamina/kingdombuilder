@@ -13,7 +13,7 @@ public class Gamestate {
     private boolean isEnding;
     private boolean gameOver;
     private int mandatorySettlementsInARow;
-    private ExtraAction movingExtraActionToUse;
+//    private ExtraAction movingExtraActionToUse;
 
     public Gamestate(){
         players = new Player[4];
@@ -23,12 +23,13 @@ public class Gamestate {
         deck = new Deck();
         //instantiate objective cards
         mandatorySettlementsInARow = 0;
-        movingExtraActionToUse = null;
 
         newGame();
     }
 
     public void newGame(){
+//        board.reset():
+//        deck.reset();
         for(int i = 0; i < 4; i++){
             players[i].setCard(deck.drawCard());
         }
@@ -37,9 +38,34 @@ public class Gamestate {
         isEnding = false;
         gameOver = false;
         gameState = 1;
+        //set message before each state occurs
+        message = "Click on either an extra-action or the mandatory settlements";
     }
 
-    public void playBasedOnState(int mouseX, int mouseY){
+    public void playBasedOnState(int mouseX, int mouseY) {
+        /*
+        pseudocoding this shit for now cause
+        im thinking about modding the gameplay system
+        gamestate
+        */
 
+        switch(gameState){
+            case 1 -> {
+                if(players[turn].extraActionClicked(mouseX, mouseY) != null)
+                {
+                    //players[turn].extraActionClicked(mouseX, mouseY).doExtraAction(this, ?, ?);
+                    //setting gamestates here should not be neccesary
+                }
+                else if(players[turn].mandatorySettlementsClicked(mouseX, mouseY) &&
+                        players[turn].getMandatorySettlementPhase().equals(MandatorySettlementPhase.hasNotUsed))
+                {
+                    players[turn].setMandatorySettlementPhase(MandatorySettlementPhase.isUsing);
+                    //board.setMandatorySettlementHexes(Player p);
+                }
+            }
+            case 2 ->{
+                message =
+            }
+        }
     }
 }

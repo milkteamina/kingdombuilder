@@ -51,7 +51,9 @@ public class ExtraActionHex extends Hex {
     }
 
     public void giveExtraAction(Player player) {
-
+        if (hasGivenToPlayer(player) && !isDepleted()) {
+            player.giveExtraAction(extraActions.remove(0));
+        }
     }
 
     public boolean hasGivenToPlayer(Player player) {
@@ -59,7 +61,10 @@ public class ExtraActionHex extends Hex {
     }
 
     public boolean hasMovedAway(Player player) {
-        //scuffed af
+        /*
+        * definitely some issues with this
+        * will resolve when working on GAmeState
+        * */
         if(hasGivenToPlayer(player)){
             for(Hex h : super.getNeighbors()){
                 if(h.getSettlement() != null && h.getSettlement().getOwner().getId() == player.getId()){

@@ -13,5 +13,4 @@ public interface ExtraAction{
     ExtraAction copy();
     void setAvailableMoves(Board b, Player p, Hex h);
 
-
 }

@@ -109,6 +109,8 @@ public class Hex {
         return "nothing";
     }
 
+    public boolean isHighlighted(){return isHighlighted;}
+
 }
 
 

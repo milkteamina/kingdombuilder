@@ -204,7 +204,10 @@ public class Board {
         }
     }
 
-
+    /*
+    When setting available moves just use highlight/unhighlight. isSettled is just a tool
+    thus, highlighted boolean serves as a tool in many contexts
+     */
 
     public void clickerTester(int x, int y){
         for(int i = 0; i < allHexes.size(); i++){

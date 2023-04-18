@@ -7,6 +7,7 @@ public interface ExtraAction{
 
     void draw(Graphics g);
     boolean isUsed();
+    String getExtraActionType();
     boolean doesItMove();
     void reset();
     boolean isClicked(int mouseX, int mouseY);

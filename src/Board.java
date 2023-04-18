@@ -48,7 +48,7 @@ public class Board {
         if(settleAnywhere)
         {
             for(Hex z : allHexes) {
-                if(!x.isSettled() && x.getType().equals(c.getTerrainType()))
+                if(!z.isSettled() && z.getType().equals(c.getTerrainType()))
                     z.highlight();
             }
         }

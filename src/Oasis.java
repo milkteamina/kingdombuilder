@@ -14,20 +14,28 @@ public class Oasis implements ExtraAction{
     private BufferedImage image;;
 
     public void setAvailableMoves(Board board, Player player){
-        
+            int desertSettlements = 0;
             for(Hex h: board.getAllHexes()){
                 if(h.getType().equals("desert")  && h.getSettlement() == null){
-                    boolean canPlace = false;
                     for(int i = 0; i<h.getNeighbors.size(); i++){
-                        if(h.getNeighbors.get(i).getType().equals("desert") && h.getNeighbors.get(i).getSettlement() != null){
-                            canPlace = true;
+                        if(h.getNeighbors.get(i).getType().equals("desert") && h.getNeighbors.get(i).getSettlement() == null){
+                            h.highlight();
                             break;
+                            desertSettlements++; 
                         }
                             
                     }
-                    h.highlight();
+                  
                 }
             } 
+        if(desertSettlements == 0){
+            for(Hex h: board.getAllHexes){
+                if(h.getType().equals("desert")){
+                    h.highlight();
+                }
+            }
+        }
+        
     }
 
     @Override

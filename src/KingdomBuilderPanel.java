@@ -13,9 +13,19 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
     private BufferedImage background;
     private int objectiveCardSpacing;
 
+    //testing variables
+    private Board b;
+
+    //here because apparently paint paints before construction which is interesting.
+    private boolean hasConstructed;
+
     public KingdomBuilderPanel() {
          try{
-           background = ImageIO.read(KingdomBuilderPanel.class.getResource("/Image/background.png");
+           background = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/background.png"));
+           b = new Board();
+           addMouseListener(this);
+           hasConstructed = true;
+
         } catch(Exception e){
             System.out.println(e);
         }
@@ -23,7 +33,11 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
 
     public void paint(Graphics g) {
         g.clearRect(0, 0, getWidth(), getHeight()); //so panel doesn't get fucked up
-        g.drawImage(background, 0, 0, null);
+        if(hasConstructed){
+            g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
+            b.drawBoard(g);
+
+        }
     }
 
     public void drawObjectiveCards(Graphics g) {
@@ -38,9 +52,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
 
     }
 
-    @Override
     public void mouseClicked(MouseEvent e) {
-        g.playBasedOnState(e.getX(), e.getY());
+//        g.playBasedOnState(e.getX(), e.getY());
         repaint();
 
     }

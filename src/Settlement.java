@@ -9,8 +9,8 @@ public class Settlement {
 
     private Player owner;
     private BufferedImage image;
-    private static final int imageSizeX = 5;
-    private static final int imageSizeY = 5;
+    private static final int imageSizeX = 20;
+    private static final int imageSizeY = 20;
 
     public Settlement(Player player){
         try{

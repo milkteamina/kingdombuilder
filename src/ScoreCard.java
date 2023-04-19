@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 
-public class ScoreCards {
+public class ScoreCard {
     private static final int SIZEX = 200;
     private static final int SIZEY = 350;
     private int x;
@@ -16,7 +16,7 @@ public class ScoreCards {
     private BufferedImage knightsFace;
     private int cardSpacingX;
     
-    public ScoreCards(int x2, int y2)
+    public ScoreCard(int x2, int y2)
     {
         try {
             x = x2;
@@ -40,6 +40,7 @@ public class ScoreCards {
                 for(Hex i : neighborHexes)
                     if(i.getType().equals("mountain"))
                         score += 1;
+                        //need to break here because it doesn't matter how many u are touching
             }
         }
         return score;

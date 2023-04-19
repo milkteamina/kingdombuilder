@@ -70,7 +70,7 @@ public class Player {
     }
 
     public void draw(Graphics g){
-        //format this later
+        //edit this later
         g.setColor(new Color(245, 229, 193));
         g.fillRoundRect(825, 400, 300, 200, 50, 30);
         g.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 30));

@@ -7,14 +7,14 @@ import javax.imageio.ImageIO;
 
 
 public class ScoreCard {
-    private static final int SIZEX = 200;
-    private static final int SIZEY = 350;
-    private static final int x = 0;
-    private static final int y = 0;
+    private static final int SIZEX = 90;
+    private static final int SIZEY = 150;
+    private static final int x = 130;
+    private static final int y = 5;
     private BufferedImage minersFace;
     private BufferedImage merchantsFace;
     private BufferedImage knightsFace;
-    private int cardSpacingX;
+    private static final int cardSpacingX = 30;
     
     public ScoreCard()
     {
@@ -126,7 +126,7 @@ public class ScoreCard {
 
     public void draw(Graphics g) {
         g.drawImage(minersFace, x, y, SIZEX, SIZEY, null);
-        g.drawImage(merchantsFace, x+cardSpacingX, y, SIZEX, SIZEY, null);
-        g.drawImage(knightsFace, x+(2 * cardSpacingX), y, SIZEX, SIZEY, null);
+        g.drawImage(merchantsFace, x + + SIZEX + cardSpacingX, y, SIZEX, SIZEY, null);
+        g.drawImage(knightsFace, x + (2 * SIZEX) + (2 * cardSpacingX), y, SIZEX, SIZEY, null);
     }
 }

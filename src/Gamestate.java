@@ -5,7 +5,7 @@ public class Gamestate {
     private Player[] players;
     private Board board;
     private Deck deck;
-    private ObjectiveCard[] objectiveCards;
+    private ScoreCard scoreCards;
     private int startingPlayer;
     private int turn;
     private int gameState;
@@ -21,6 +21,8 @@ public class Gamestate {
 
         board = new Board();
         deck = new Deck();
+        scoreCards = new ScoreCard();
+
         //instantiate objective cards
         mandatorySettlementsInARow = 0;
 

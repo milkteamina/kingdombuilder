@@ -70,7 +70,30 @@ public class Player {
     }
 
     public void draw(Graphics g){
-
+        //format this later
+        g.setColor(new Color(245, 229, 193));
+           g.fillRoundRect(825, 400, 300, 200, 50, 30);
+           g.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 30));
+           g.setColor(Color.BLACK);
+           g.drawString("Player " + getId(), 1000, 575);
+           if(player.getId() == 0){
+            g.setColor(new Color(242, 122, 10 ));
+            } else if(player.getId() == 1){
+            g.setColor(new Color(200, 66, 245));
+            } else if(player.getId() == 2){
+            g.setColor(Color.BLACK);
+            } else if(player.getId() == 3){
+            g.setColor(Color.DARK_GRAY);
+            }
+           g.fillRect(850, 530, 60, 50);
+           int[] x = {840, 880, 920};
+           int[] y = {540, 500, 540};
+           g.fillPolygon( x, y, 3);
+           g.setColor(Color.WHITE);
+           Font stringFont = new Font( "SansSerif", Font.PLAIN, 40);
+           g.setFont(stringFont);
+           g.drawString(getSettlementsRemaining(), 857, 565);
+           card.draw(g, 1025, 430);
     }
 
     public ExtraAction extraActionClicked(int mouseX, int mouseY){

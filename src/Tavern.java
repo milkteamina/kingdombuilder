@@ -24,7 +24,7 @@ public class Tavern implements ExtraAction{
             image = ImageIO.read(Tavern.class.getResource("/Images/KB-tavern.png"));
         }
         catch (Exception e) {
-            System.out.println("Tavern constructor failed due to IOException");
+            System.out.println(e);
         }
 
     }

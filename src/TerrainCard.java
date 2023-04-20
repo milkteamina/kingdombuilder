@@ -8,8 +8,8 @@ import javax.imageio.ImageIO;
 public class TerrainCard {
     private String terrainType;
     private BufferedImage cardFace;
-    private static final int sizeX = 100;
-    private static final int sizeY = 50;
+    private static final int sizeX = 75;
+    private static final int sizeY = 100;
 
     public TerrainCard(String terrainType){
         try{

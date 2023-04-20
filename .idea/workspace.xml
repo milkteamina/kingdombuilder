@@ -7,7 +7,7 @@
     <list default="true" id="824870fc-591f-4416-b090-f61689bbdaef" name="Changes" comment="stuff">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ScoreCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ScoreCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TerrainCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TerrainCard.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +166,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681928327975</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="stuff">
+      <created>1681929491733</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1681929491733</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

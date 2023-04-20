@@ -24,12 +24,13 @@ public class Harbor implements ExtraAction{
             image = ImageIO.read(Harbor.class.getResource("/Images/KB-harbor.png"));
         }
         catch (Exception e) {
-            System.out.println("Harbor constructor failed due to IOException");
+            System.out.println(e);
         }
 
     }
     public void setAvailableMoves(Board board, Player player, Hex hex){
 
+         
     }
 
     public void draw(Graphics g) {

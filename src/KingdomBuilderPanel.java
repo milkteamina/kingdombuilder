@@ -45,9 +45,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
         }
     }
 
-    public void drawObjectiveCards(Graphics g) {
-
-    }
+  
 
     public void drawScoring(Graphics g) {
 

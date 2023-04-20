@@ -35,7 +35,7 @@ public class Deck {
             Collections.shuffle(deck);
 
         }catch(Exception e){
-            System.out.println("Deck constructor failed due to exception error");
+            System.out.println(e);
         }
     }
     public TerrainCard drawCard(){

@@ -29,7 +29,7 @@ public class TerrainCard {
             }
 
         } catch(Exception e){
-            System.out.println("TerrainCard constructor failed due to IO exception");
+            System.out.println(e);
         }
     }
 

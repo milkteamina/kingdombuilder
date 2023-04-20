@@ -39,7 +39,7 @@ public class Tavern implements ExtraAction{
                     if(j.getSettlement() != null){ // checks for the second settlement
                         for(Hex k : j.getNeighbors()){
                          if(k.getSettlement() != null){ //checks for a third connected settlement
-                            if(h.highlight()== false){
+                            if(h.isHighlighted()== false){
                                 h.highlight();
                             }
                          }

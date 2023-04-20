@@ -33,11 +33,11 @@ public class Oasis implements ExtraAction{
             int desertSettlements = 0;
             for(Hex h: board.getAllHexes()){
                 if(h.getType().equals("desert")  && h.getSettlement() == null){
-                    for(int i = 0; i<h.getNeighbors.size(); i++){
-                        if(h.getNeighbors.get(i).getType().equals("desert") && h.getNeighbors.get(i).getSettlement() == null){
+                    for(int i = 0; i<h.getNeighbors().size(); i++){
+                        if(h.getNeighbors().get(i).getType().equals("desert") && h.getNeighbors().get(i).getSettlement() == null){
                             h.highlight();
+                            desertSettlements++;
                             break;
-                            desertSettlements++; 
                         }
                             
                     }
@@ -45,7 +45,7 @@ public class Oasis implements ExtraAction{
                 }
             } 
         if(desertSettlements == 0){
-            for(Hex h: board.getAllHexes){
+            for(Hex h: board.getAllHexes()){
                 if(h.getType().equals("desert")){
                     h.highlight();
                 }

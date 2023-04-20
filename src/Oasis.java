@@ -24,7 +24,7 @@ public class Oasis implements ExtraAction{
             image = ImageIO.read(Harbor.class.getResource("/Images/KB-oasis.png"));
         }
         catch (Exception e) {
-            System.out.println("Oasis constructor failed due to IOException");
+            System.out.println(e);
         }
 
     }

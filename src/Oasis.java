@@ -28,9 +28,32 @@ public class Oasis implements ExtraAction{
         }
 
     }
+    
     public void setAvailableMoves(Board board, Player player, Hex hex){
-
+            int desertSettlements = 0;
+            for(Hex h: board.getAllHexes()){
+                if(h.getType().equals("desert")  && h.getSettlement() == null){
+                    for(int i = 0; i<h.getNeighbors.size(); i++){
+                        if(h.getNeighbors.get(i).getType().equals("desert") && h.getNeighbors.get(i).getSettlement() == null){
+                            h.highlight();
+                            break;
+                            desertSettlements++; 
+                        }
+                            
+                    }
+                  
+                }
+            } 
+        if(desertSettlements == 0){
+            for(Hex h: board.getAllHexes){
+                if(h.getType().equals("desert")){
+                    h.highlight();
+                }
+            }
+        }
+        
     }
+
 
     public void draw(Graphics g) {
         g.drawImage(image, x, y, sizeX, sizeY, null);

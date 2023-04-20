@@ -28,9 +28,32 @@ public class Tavern implements ExtraAction{
         }
 
     }
+    
     public void setAvailableMoves(Board board, Player player, Hex hex){
-
+                //probably not the best way to do this 
+        for(Hex h: board.getAllHexes()){
+             if(h.getSettlement() == null){//looks at all the free hexes
+              for(Hex i: h.getNeighbors()){
+                if(i.getSettlement() != null){ // starts the 3 settlement chain 
+                  for(Hex j: i.getNeighbors()){
+                    if(j.getSettlement() != null){ // checks for the second settlement
+                        for(Hex k : j.getNeighbors()){
+                         if(k.getSettlement() != null){ //checks for a third connected settlement
+                            if(h.highlight()== false){
+                                h.highlight();
+                            }
+                         }
+                        }
+                    }
+                  }
+                }
+              }
+                 
+             }  
+             
+          }
     }
+
 
     public void draw(Graphics g) {
         g.drawImage(image, x, y, sizeX, sizeY, null);

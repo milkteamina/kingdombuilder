@@ -24,7 +24,7 @@ public class Paddock implements ExtraAction{
             image = ImageIO.read(Paddock.class.getResource("/Images/KB-paddock.png"));
         }
         catch (Exception e) {
-            System.out.println("Paddock constructor failed due to IOException");
+            System.out.println(e);
         }
 
     }

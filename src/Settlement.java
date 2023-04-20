@@ -27,7 +27,7 @@ public class Settlement {
             }
 
         }catch(Exception e){
-            System.out.println("Settlement constructor failed due to IO exception");
+            System.out.println(e);
         }
     }
 

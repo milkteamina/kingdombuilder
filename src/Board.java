@@ -218,5 +218,26 @@ public class Board {
 
     }
 
-
+    public void SetMandatorySettlementHexes(Player p) {
+        //check logic
+        TerrainCard c = p.getCard();
+        boolean settleAnywhere = true;
+        for (Hex x : allHexes) {
+            if (!x.isSettled() && x.getType().equals(c.getTerrainType())) {
+                ArrayList<Hex> neighbors = x.getNeighbors();
+                for (Hex y : neighbors) {
+                    if (y.getSettlement().getOwner().getId() == p.getId()) {
+                        x.highlight();
+                        settleAnywhere = false;
+                    }
+                }
+            }
+            if (settleAnywhere) {
+                for (Hex z : allHexes) {
+                    if (!z.isSettled() && z.getType().equals(c.getTerrainType()))
+                        z.highlight();
+                }
+            }
+        }
+    }
 }

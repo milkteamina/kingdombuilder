@@ -7,14 +7,32 @@ import javax.imageio.ImageIO;
 
 public class Player {
 
+    private static final int boxX = 825;
+    private static final int boxY = 400;
+    private static final int boxSizeX = 300;
+    private static final int boxSizeY = 200;
+    private static final int playerNameMarginX = 175;
+    private static final int playerNameMarginY = 175;
+    private static final int mandatorySettlementButtonSize = 50;
+    private static final int mandatorySettlementsButtonSpacingX = 20;
+    private static final int mandatorySettlementsButtonSpacingY = 140;
+    private static final int[] mandatorySettlementButtonPointsX = {
+                    boxX + mandatorySettlementsButtonSpacingX,
+                    boxX + mandatorySettlementsButtonSpacingX + mandatorySettlementButtonSize / 2,
+                    boxX + mandatorySettlementsButtonSpacingX + mandatorySettlementButtonSize,
+                    boxX + mandatorySettlementsButtonSpacingX + mandatorySettlementButtonSize,
+                    boxX + mandatorySettlementsButtonSpacingX};
+    private static final int[] mandatorySettlementButtonPointsY = {
+                    boxY + mandatorySettlementsButtonSpacingY,
+                    boxY + mandatorySettlementsButtonSpacingY - 20,
+                    boxY + mandatorySettlementsButtonSpacingY,
+                    boxY + mandatorySettlementsButtonSpacingY + mandatorySettlementButtonSize,
+                    boxY + mandatorySettlementsButtonSpacingY + mandatorySettlementButtonSize };
+    private static final int cardMarginX = 1025 - boxX;
+    private static final int cardMarginY = 415 - boxY;
+    private Color settlementButtonColor;
     private static final int extraActionSpacingX = 0;
     private static final int extraActionSpacingY = 0;
-
-    private static final int mandatorySettlementButtonSize = 50;
-    private static final int mandatorySettlementsButtonX = 0;
-    private static final int mandatorySettlementsButtonY = 0;
-    private static final int cardX = 0;
-    private static final int cardY = 0;
     private final int id;
     private ArrayList<Settlement> settlements;
     private ArrayList<ExtraAction> extraActions;
@@ -33,6 +51,16 @@ public class Player {
         extraActions = new ArrayList<>();
         int score = 0;
         mandatorySettlementPhase = MandatorySettlementPhase.hasNotUsed;
+
+        if (id == 0) {
+            settlementButtonColor = new Color(242, 122, 10);
+        } else if (id == 1) {
+            settlementButtonColor = new Color(200, 66, 245);
+        } else if (id == 2) {
+            settlementButtonColor = Color.black;
+        } else if (id == 3) {
+            settlementButtonColor = Color.gray;
+        }
     }
 
     public int getId(){
@@ -70,6 +98,24 @@ public class Player {
     }
 
     public void draw(Graphics g){
+        //set bg color
+        g.setColor(new Color(245, 229, 193));
+        //create bg
+        g.fillRoundRect(boxX, boxY, boxSizeX, boxSizeY, 50, 30);
+       //draw player name
+        g.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 30));
+        g.setColor(Color.BLACK);
+        g.drawString("Player " + getId(), boxX + playerNameMarginX, boxY + playerNameMarginY);
+        //drawing settlement button
+        g.setColor(settlementButtonColor);
+        g.fillPolygon(mandatorySettlementButtonPointsX, mandatorySettlementButtonPointsY, 5);
+        //draw amount of settlements left
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("SansSerif", Font.PLAIN, 20));
+        g.drawString(" " + getSettlementsRemaining(), mandatorySettlementButtonPointsX[0] + 9, mandatorySettlementButtonPointsY[0] + 25);
+        //draw card
+        card.draw(g, boxX + cardMarginX, boxY + cardMarginY);
+        //todo: draw ExtraActions will most likely do after/during the making of the GameState
 
     }
 
@@ -83,10 +129,35 @@ public class Player {
 
     }
 
-    public boolean mandatorySettlementsClicked(int mouseX, int mouseY){
-        return mouseX > mandatorySettlementsButtonX && mouseX < mandatorySettlementsButtonX + mandatorySettlementButtonSize &&
-                mouseY > mandatorySettlementsButtonY && mouseY < mandatorySettlementsButtonY + mandatorySettlementButtonSize;
+    public boolean mandatorySettlementsClicked(int x, int y) {
+
+        // initialize the crossing number
+        int cn = 0;
+
+        // iterate over the edges of the pentagon
+        for (int i = 0; i < Player.mandatorySettlementButtonPointsX.length; i++) {
+            // get the coordinates of the endpoints of the current edge
+            double x1 = Player.mandatorySettlementButtonPointsX[i];
+            double y1 = Player.mandatorySettlementButtonPointsY[i];
+            double x2 = Player.mandatorySettlementButtonPointsX[(i+1) % Player.mandatorySettlementButtonPointsX.length];
+            double y2 = Player.mandatorySettlementButtonPointsY[(i+1) % Player.mandatorySettlementButtonPointsY.length];
+
+            // check if the edge crosses the horizontal ray from the point
+            if (((y1 <= y) && (y2 > y)) || ((y1 > y) && (y2 <= y))) {
+                // calculate the x-coordinate of the intersection point
+                double xi = (y - y1) * (x2 - x1) / (y2 - y1) + x1;
+
+                // if the intersection point is to the right of the point, increment the crossing number
+                if (xi > x) {
+                    cn++;
+                }
+            }
+        }
+
+        // if the crossing number is odd, the point is inside the pentagon
+        return (cn % 2 == 1);
     }
+
 
     public void resetExtraActions(){
         for(int i = 0; i < extraActions.size(); i++){

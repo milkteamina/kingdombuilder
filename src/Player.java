@@ -6,21 +6,61 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 public class Player {
+
+    private static final int boxX = 825;
+    private static final int boxY = 400;
+    private static final int boxSizeX = 300;
+    private static final int boxSizeY = 200;
+    private static final int playerNameMarginX = 175;
+    private static final int playerNameMarginY = 175;
+    private static final int mandatorySettlementButtonSize = 50;
+    private static final int mandatorySettlementsButtonSpacingX = 20;
+    private static final int mandatorySettlementsButtonSpacingY = 140;
+    private static final int[] mandatorySettlementButtonPointsX = {
+                    boxX + mandatorySettlementsButtonSpacingX,
+                    boxX + mandatorySettlementsButtonSpacingX + mandatorySettlementButtonSize / 2,
+                    boxX + mandatorySettlementsButtonSpacingX + mandatorySettlementButtonSize,
+                    boxX + mandatorySettlementsButtonSpacingX + mandatorySettlementButtonSize,
+                    boxX + mandatorySettlementsButtonSpacingX};
+    private static final int[] mandatorySettlementButtonPointsY = {
+                    boxY + mandatorySettlementsButtonSpacingY,
+                    boxY + mandatorySettlementsButtonSpacingY - 20,
+                    boxY + mandatorySettlementsButtonSpacingY,
+                    boxY + mandatorySettlementsButtonSpacingY + mandatorySettlementButtonSize,
+                    boxY + mandatorySettlementsButtonSpacingY + mandatorySettlementButtonSize };
+    private static final int cardMarginX = 1025 - boxX;
+    private static final int cardMarginY = 415 - boxY;
+    private Color settlementButtonColor;
+    private static final int extraActionSpacingX = 0;
+    private static final int extraActionSpacingY = 0;
+    private final int id;
     private ArrayList<Settlement> settlements;
     private ArrayList<ExtraAction> extraActions;
     private TerrainCard card;
-    private int id;
     private int score;
-    private int extraActionSpacingX;
-    private int extraActionSpacingY;
-    private int mandatorySettlementsButtonX;
-    private int mandatorySettlementsButtonY;
-    private int cardX;
-    private int cardY;
-    private Enum mandatorySettlementPhase;
+    private MandatorySettlementPhase mandatorySettlementPhase;
 
-    public Player(){
+    public Player(int id){
+        this.id = id;
+        settlements = new ArrayList<>();
+        
+        for(int i = 0; i < 40; i++){
+            settlements.add(new Settlement(this));
+        }
+        
+        extraActions = new ArrayList<>();
+        int score = 0;
+        mandatorySettlementPhase = MandatorySettlementPhase.hasNotUsed;
 
+        if (id == 0) {
+            settlementButtonColor = new Color(242, 122, 10);
+        } else if (id == 1) {
+            settlementButtonColor = new Color(200, 66, 245);
+        } else if (id == 2) {
+            settlementButtonColor = Color.black;
+        } else if (id == 3) {
+            settlementButtonColor = Color.gray;
+        }
     }
 
     public int getId(){
@@ -39,42 +79,85 @@ public class Player {
         return settlements.size();
     }
 
+    public void placeSettlement(Hex h){
+        if(getSettlementsRemaining() > 0){
+            h.placeSettlement(settlements.remove(0));
+        }
+    }
+
+    public void giveExtraAction(ExtraAction extraAction){
+//        ExtraActionHex hex = (ExtraActionHex) h;
+        extraActions.add(extraAction);
+    }
+
+    public TerrainCard getCard(){
+        return card;
+    }
+    public void setCard(TerrainCard c){
+        card = c;
+    }
+
     public void draw(Graphics g){
-       
-       
-           g.setColor(new Color(245, 229, 193));
-           g.fillRoundRect(825, 400, 300, 200, 50, 30);
-           g.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 30));
-           g.setColor(Color.BLACK);
-           g.drawString("Player " + getId(), 1000, 575);
-           if(player.getId() == 0){
-            g.setColor(new Color(242, 122, 10 ));
-            } else if(player.getId() == 1){
-            g.setColor(new Color(200, 66, 245));
-            } else if(player.getId() == 2){
-            g.setColor(Color.BLACK);
-            } else if(player.getId() == 3){
-            g.setColor(Color.DARK_GRAY);
-            }
-           g.fillRect(850, 530, 60, 50);
-           int[] x = {840, 880, 920};
-           int[] y = {540, 500, 540};
-           g.fillPolygon( x, y, 3);
-           g.setColor(Color.WHITE);
-           Font stringFont = new Font( "SansSerif", Font.PLAIN, 40);
-           g.setFont(stringFont);
-           g.drawString(getSettlementsRemaining(), 857, 565);
-           card.draw(g, 1025, 430);
+        //set bg color
+        g.setColor(new Color(245, 229, 193));
+        //create bg
+        g.fillRoundRect(boxX, boxY, boxSizeX, boxSizeY, 50, 30);
+       //draw player name
+        g.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 30));
+        g.setColor(Color.BLACK);
+        g.drawString("Player " + getId(), boxX + playerNameMarginX, boxY + playerNameMarginY);
+        //drawing settlement button
+        g.setColor(settlementButtonColor);
+        g.fillPolygon(mandatorySettlementButtonPointsX, mandatorySettlementButtonPointsY, 5);
+        //draw amount of settlements left
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("SansSerif", Font.PLAIN, 20));
+        g.drawString(" " + getSettlementsRemaining(), mandatorySettlementButtonPointsX[0] + 9, mandatorySettlementButtonPointsY[0] + 25);
+        //draw card
+        card.draw(g, boxX + cardMarginX, boxY + cardMarginY);
+        //todo: draw ExtraActions will most likely do after/during the making of the GameState
 
     }
 
     public ExtraAction extraActionClicked(int mouseX, int mouseY){
+        //perhaps we can later figure this out w/basic math instead of with a bunch of methods
+        for(int i = 0; i < extraActions.size(); i++){
+            if(extraActions.get(i).isClicked(mouseX, mouseY)) return extraActions.get(i);
+        }
+
+        return null;
 
     }
 
-    public boolean mandatorySettlementsClicked(int mouseX, int mouseY){
+    public boolean mandatorySettlementsClicked(int x, int y) {
 
+        // initialize the crossing number
+        int cn = 0;
+
+        // iterate over the edges of the pentagon
+        for (int i = 0; i < Player.mandatorySettlementButtonPointsX.length; i++) {
+            // get the coordinates of the endpoints of the current edge
+            double x1 = Player.mandatorySettlementButtonPointsX[i];
+            double y1 = Player.mandatorySettlementButtonPointsY[i];
+            double x2 = Player.mandatorySettlementButtonPointsX[(i+1) % Player.mandatorySettlementButtonPointsX.length];
+            double y2 = Player.mandatorySettlementButtonPointsY[(i+1) % Player.mandatorySettlementButtonPointsY.length];
+
+            // check if the edge crosses the horizontal ray from the point
+            if (((y1 <= y) && (y2 > y)) || ((y1 > y) && (y2 <= y))) {
+                // calculate the x-coordinate of the intersection point
+                double xi = (y - y1) * (x2 - x1) / (y2 - y1) + x1;
+
+                // if the intersection point is to the right of the point, increment the crossing number
+                if (xi > x) {
+                    cn++;
+                }
+            }
+        }
+
+        // if the crossing number is odd, the point is inside the pentagon
+        return (cn % 2 == 1);
     }
+
 
     public void resetExtraActions(){
         for(int i = 0; i < extraActions.size(); i++){
@@ -82,12 +165,12 @@ public class Player {
         }
     }
 
-    public Enum getMandatorySettlementPhase(){
+    public MandatorySettlementPhase getMandatorySettlementPhase(){
         return mandatorySettlementPhase;
     }
 
-    public void setMandatorySettlementPhase(Enum e){
-        mandatorySettlementPhase = e;
+    public void setMandatorySettlementPhase(MandatorySettlementPhase p){
+        mandatorySettlementPhase = p;
     }
 
 

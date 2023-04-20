@@ -4,32 +4,32 @@ import javax.swing.*;
 
 public class BasicHex extends Hex{
 
-    private String terrainType;
+    private final String terrainType;
     private Settlement settlement;
 
-    public BasicHex(int x, int y, ArrayList<Hex> neighbors, String terrainType){
-        super(x, y, neighbors);
+    public BasicHex(int[] pointsX, int[] pointsY, ArrayList<Hex> neighbors, String terrainType){
+        super(pointsX, pointsY, neighbors);
         this.terrainType = terrainType;
     }
 
     public void placeSettlement(Settlement s){
+        //make sure there are no reference errors
         settlement = s;
     }
 
-    public String getTerrainType() {
+    public String getType() {
         return terrainType;
     }
 
-    public boolean isPlacable(){
-        /*used only for checking suitable hexes when placing mandatory settlements because ExtraAction
-        hexes have their own methods for setting eligible hexes*/
-
-        return settlement == null;
+    public boolean isSettled(){
+        return settlement != null;
     }
 
     public void draw(Graphics g){
+        super.draw(g);
         if(settlement != null){
-            settlement.draw(g, super.getX() + super.getSettlementSpacingX(), super.getY() + super.getSettlementSpacingY());
+            settlement.draw(g, super.getPointsX()[0] + super.getSettlementSpacingX(), super.getPointsY()[0] + super.getSettlementSpacingY());
         }
     }
+
 }

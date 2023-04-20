@@ -8,16 +8,26 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class KingdomBuilderPanel extends JPanel implements MouseListener{
-   
+
     private Gamestate g;
     private BufferedImage background;
     private int objectiveCardSpacing;
-    private Deck deck;
+
+    //testing variables
+    private Board b;
+    private Player p;
+
+    //here because apparently paint paints before construction which is interesting.
+    private boolean hasConstructed;
 
     public KingdomBuilderPanel() {
          try{
-           background = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/background.png");
-          
+           background = ImageIO.read(KingdomBuilderPanel.class.getResource("/Images/background.png"));
+           b = new Board();
+           p = new Player(0);
+           addMouseListener(this);
+           hasConstructed = true;
+
         } catch(Exception e){
             System.out.println(e);
         }
@@ -25,12 +35,18 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
 
     public void paint(Graphics g) {
         g.clearRect(0, 0, getWidth(), getHeight()); //so panel doesn't get fucked up
-        g.drawImage(background, 0, 0, null);
+        if(hasConstructed){
+            g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
+            b.drawBoard(g);
+            p.setCard(new TerrainCard("desert"));
+            p.draw(g);
+            ScoreCard s = new ScoreCard();
+            s.draw(g);
+        }
     }
 
     public void drawObjectiveCards(Graphics g) {
-        
-       
+
     }
 
     public void drawScoring(Graphics g) {
@@ -38,13 +54,11 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener{
     }
 
     public void drawDeck(Graphics g) {
-       deck.draw();
-       
+
     }
 
-    @Override
     public void mouseClicked(MouseEvent e) {
-        g.playBasedOnState(e.getX(), e.getY());
+//        g.playBasedOnState(e.getX(), e.getY());
         repaint();
 
     }

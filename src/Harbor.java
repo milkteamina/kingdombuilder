@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
+
 public class Harbor implements ExtraAction{
 
     private static final boolean doesItMove = true;
@@ -32,7 +33,11 @@ public class Harbor implements ExtraAction{
     }
 
     public void draw(Graphics g) {
+        g.drawImage(image, x, y, sizeX, sizeY, null);
+    }
 
+    public boolean isClicked(int mouseX, int mouseY){
+        return mouseX > x && mouseX < x + sizeX && mouseY > y && mouseY < y + sizeY;
     }
 
     public boolean isUsed() {
@@ -67,5 +72,11 @@ public class Harbor implements ExtraAction{
         return y;
     }
 
+    public ExtraAction copy() {
+        /*because the ExtraAction will be used for setting purposes
+         making its coords messed up should do no harm
+         */
+        return new Harbor(-1, -1);
+    }
 
 }

@@ -5,14 +5,13 @@ import javax.swing.*;
 public class ExtraActionHex extends Hex {
     private boolean[] adjacentPlayers;
     private ArrayList<ExtraAction> extraActions;
-    private String extraActionType; //could be useful
+    private String extraActionType;
+    private static final int extraActionSpacingX = 2;
+    private static final int extraActionSpacingY = 9;
 
-    private static final int extraActionSpacingX = 1;
-    private static final int extraActionSpacingY = 1;
 
-
-    public ExtraActionHex(int x, int y, ArrayList<Hex> neighbors, String extraActionType) {
-        super(x, y, neighbors);
+    public ExtraActionHex(int[] pointsX, int[] pointsY, ArrayList<Hex> neighbors, String extraActionType) {
+        super(pointsX, pointsY, neighbors);
         this.extraActionType = extraActionType;
         adjacentPlayers = new boolean[6];
         extraActions = new ArrayList<>();
@@ -23,20 +22,20 @@ public class ExtraActionHex extends Hex {
 
         switch (extraActionType) {
             case "harbor" -> {
-                extraActions.add(new Harbor(getX() + extraActionSpacingX, getY() + extraActionSpacingY));
-                extraActions.add(new Harbor(getX() + extraActionSpacingX, getY() + extraActionSpacingY));
+                extraActions.add(new Harbor(getPointsX()[0] - extraActionSpacingX, getPointsY()[0] - extraActionSpacingY));
+                extraActions.add(new Harbor(getPointsX()[0] - extraActionSpacingX, getPointsY()[0] - extraActionSpacingY));
             }
             case "oasis" -> {
-                extraActions.add(new Oasis());
-                extraActions.add(new Oasis());
+                extraActions.add(new Oasis(getPointsX()[0] - extraActionSpacingX, getPointsY()[0] - extraActionSpacingY));
+                extraActions.add(new Oasis(getPointsX()[0] - extraActionSpacingX, getPointsY()[0] - extraActionSpacingY));
             }
             case "paddock" -> {
-                extraActions.add(new Paddock());
-                extraActions.add(new Paddock());
+                extraActions.add(new Paddock(getPointsX()[0] - extraActionSpacingX, getPointsY()[0] - extraActionSpacingY));
+                extraActions.add(new Paddock(getPointsX()[0] - extraActionSpacingX, getPointsY()[0] - extraActionSpacingY));
             }
             case "tavern" -> {
-                extraActions.add(new Tavern());
-                extraActions.add(new Tavern());
+                extraActions.add(new Tavern(getPointsX()[0] - extraActionSpacingX, getPointsY()[0] - extraActionSpacingY));
+                extraActions.add(new Tavern(getPointsX()[0] - extraActionSpacingX, getPointsY()[0] - extraActionSpacingY));
             }
         }
     }
@@ -52,7 +51,9 @@ public class ExtraActionHex extends Hex {
     }
 
     public void giveExtraAction(Player player) {
-        //TODO
+        if (hasGivenToPlayer(player) && !isDepleted()) {
+            player.giveExtraAction(extraActions.remove(0));
+        }
     }
 
     public boolean hasGivenToPlayer(Player player) {
@@ -60,7 +61,10 @@ public class ExtraActionHex extends Hex {
     }
 
     public boolean hasMovedAway(Player player) {
-        //scuffed af
+        /*
+        * definitely some issues with this
+        * will resolve when working on GAmeState
+        * */
         if(hasGivenToPlayer(player)){
             for(Hex h : super.getNeighbors()){
                 if(h.getSettlement() != null && h.getSettlement().getOwner().getId() == player.getId()){
@@ -71,7 +75,7 @@ public class ExtraActionHex extends Hex {
         return true;
     }
 
-    public String getExtraActionType(){
+    public String getType(){
         return extraActionType;
     }
 }

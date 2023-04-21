@@ -29,7 +29,28 @@ public class Harbor implements ExtraAction{
 
     }
     public void setAvailableMoves(Board board, Player player, Hex hex){
-
+         //highlights AFTER an existing settlement is clicked- may need to modify
+            int waterSettlements = 0;
+            for(Hex h: board.getAllHexes()){
+                if(h.getType().equals("water")  && h.getSettlement() == null){
+                    for(int i = 0; i<h.getNeighbors().size(); i++){
+                        if(h.getNeighbors().get(i).getType().equals("water") && h.getNeighbors().get(i).getSettlement() == null){
+                            h.highlight();
+                            waterSettlements++;
+                            break;
+                        }
+                            
+                    }
+                  
+                }
+            } 
+        if(waterSettlements == 0){
+            for(Hex h: board.getAllHexes()){
+                if(h.getType().equals("water")){
+                    h.highlight();
+                }
+            }
+        }
          
     }
 

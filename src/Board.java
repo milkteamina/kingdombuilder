@@ -123,7 +123,7 @@ public class Board {
 
             /*
             now that the array is filled, we can (attempt to) create the graph based on the array
-            fill the Hex's ArrayList in the same images as its points are stored (top left start then go clockwise)
+            fill the Hex's ArrayList in the same order as its points are stored (top left start then go clockwise)
             {
             {1, 0, 2, 0, 3, 0, 4},
             {0, 5, 0, 6, 0, 7, 0},

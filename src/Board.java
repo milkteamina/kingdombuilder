@@ -35,6 +35,7 @@ public class Board {
     private BufferedImage boardImageQuadrant2;
     private BufferedImage boardImageQuadrant3;
     private BufferedImage boardImageQuadrant4;
+    private ArrayList<BufferedImage> images;
 
 
     /*
@@ -59,8 +60,27 @@ public class Board {
     public Board(){
         try{
 
-            File boardAsText = new File("src/Boards/defaultBoard.txt");
-            Scanner sc = new Scanner(boardAsText);
+            File quad1 = new File("src/Boards/quad1.txt");
+            File quad2 = new File("src/Boards/quad2.txt");
+            File quad3 = new File("src/Boards/quad3.txt");
+            File quad4 = new File("src/Boards/quad4.txt");
+            Scanner sc1 = new Scanner(quad1);
+            Scanner sc2 = new Scanner(quad2);
+            Scanner sc3 = new Scanner(quad3);
+            Scanner sc4 = new Scanner(quad4);
+
+            ArrayList<Integer> quads = new ArrayList();
+                quads.add(1); quads.add(2); quads.add(3); quads.add(4); 
+            ArrayList<String> quadrants = new ArrayList(); 
+            for(int m = 0; m < 4; m++) {
+            int rand = (int)(Math.random()*(4-m)); 
+
+            if(quads.get(rand) == 1) {while(sc1.hasNext()) quadrants.add(sc1.next()); images.add(boardImageQuadrant1);}
+            if(quads.get(rand) == 2) {while(sc2.hasNext()) quadrants.add(sc2.next()); images.add(boardImageQuadrant2);}
+            if(quads.get(rand) == 3) {while(sc3.hasNext()) quadrants.add(sc3.next()); images.add(boardImageQuadrant3);} 
+            if(quads.get(rand) == 4) {while(sc4.hasNext()) quadrants.add(sc4.next()); images.add(boardImageQuadrant4);}
+            quads.remove(rand);}
+
             allHexes = new ArrayList<>();
             hexes = new Hex[20][40];
 
@@ -71,6 +91,7 @@ public class Board {
 
             int[] tempPointsX = new int[6];
             int[] tempPointsY = new int[6];
+            int position = 0;
 
             for(int i = 0; i < 20; i++){
                 for(int j = 0; j < 40; j += 2){
@@ -82,7 +103,7 @@ public class Board {
                         tempPointsY[k] = startPointsY[k] + i * hexagonShiftY;
                     }
 
-                    switch (sc.next()) {
+                    switch (quadrants.get(position)) {
                         case "0" -> hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "desert");
                         case "1" -> hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "water");
                         case "2" -> hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "mountain");
@@ -102,7 +123,7 @@ public class Board {
 
             /*
             now that the array is filled, we can (attempt to) create the graph based on the array
-            fill the Hex's ArrayList in the same order as its points are stored (top left start then go clockwise)
+            fill the Hex's ArrayList in the same images as its points are stored (top left start then go clockwise)
             {
             {1, 0, 2, 0, 3, 0, 4},
             {0, 5, 0, 6, 0, 7, 0},
@@ -193,10 +214,10 @@ public class Board {
 
     public void drawBoard(Graphics g){
         //draw image of board
-        g.drawImage(boardImageQuadrant2, boardX, boardY, BOARD_QUADRANT_SIZE_X, BOARD_QUADRANT_SIZE_Y, null);
-        g.drawImage(boardImageQuadrant1, boardX + BOARD_QUADRANT_SIZE_X - boardAdjustX, boardY, BOARD_QUADRANT_SIZE_X, BOARD_QUADRANT_SIZE_Y, null);
-        g.drawImage(boardImageQuadrant3, boardX, boardY + BOARD_QUADRANT_SIZE_Y - boardAdjustY, BOARD_QUADRANT_SIZE_X, BOARD_QUADRANT_SIZE_Y, null);
-        g.drawImage(boardImageQuadrant4, boardX + BOARD_QUADRANT_SIZE_X - boardAdjustX, boardY + BOARD_QUADRANT_SIZE_Y - boardAdjustY, BOARD_QUADRANT_SIZE_X, BOARD_QUADRANT_SIZE_Y, null);
+        g.drawImage(images.get(2), boardX, boardY, BOARD_QUADRANT_SIZE_X, BOARD_QUADRANT_SIZE_Y, null);
+        g.drawImage(images.get(1), boardX + BOARD_QUADRANT_SIZE_X - boardAdjustX, boardY, BOARD_QUADRANT_SIZE_X, BOARD_QUADRANT_SIZE_Y, null);
+        g.drawImage(images.get(3), boardX, boardY + BOARD_QUADRANT_SIZE_Y - boardAdjustY, BOARD_QUADRANT_SIZE_X, BOARD_QUADRANT_SIZE_Y, null);
+        g.drawImage(images.get(4), boardX + BOARD_QUADRANT_SIZE_X - boardAdjustX, boardY + BOARD_QUADRANT_SIZE_Y - boardAdjustY, BOARD_QUADRANT_SIZE_X, BOARD_QUADRANT_SIZE_Y, null);
 
 
         for(int i = 0; i < allHexes.size(); i++){

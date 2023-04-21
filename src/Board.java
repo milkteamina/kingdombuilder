@@ -117,6 +117,7 @@ public class Board {
                         case "10" -> hexes[i][j] = new ExtraActionHex(tempPointsX, tempPointsY, null, "tavern");
                         case "11" -> hexes[i][j] = new ExtraActionHex(tempPointsX, tempPointsY, null, "harbor");
                     }
+                    position++;
 
                 }
             }

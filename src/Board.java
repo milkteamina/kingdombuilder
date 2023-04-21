@@ -59,15 +59,10 @@ public class Board {
 
     public Board(){
         try{
-
-            File quad1 = new File("src/Boards/quad1.txt");
-            File quad2 = new File("src/Boards/quad2.txt");
-            File quad3 = new File("src/Boards/quad3.txt");
-            File quad4 = new File("src/Boards/quad4.txt");
-            Scanner sc1 = new Scanner(quad1);
-            Scanner sc2 = new Scanner(quad2);
-            Scanner sc3 = new Scanner(quad3);
-            Scanner sc4 = new Scanner(quad4);
+            Scanner sc1 = new Scanner(new File("src/Boards/quad1.txt"));
+            Scanner sc2 = new Scanner(new File("src/Boards/quad2.txt"));
+            Scanner sc3 = new Scanner(new File("src/Boards/quad3.txt"));
+            Scanner sc4 = new Scanner(new File("src/Boards/quad4.txt"));
 
             ArrayList<Integer> quads = new ArrayList();
                 quads.add(1); quads.add(2); quads.add(3); quads.add(4); 

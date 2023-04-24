@@ -34,7 +34,7 @@ public class Oasis implements ExtraAction{
             for(Hex h: board.getAllHexes()){
                 if(h.getType().equals("desert")  && h.getSettlement() == null){
                     for(int i = 0; i<h.getNeighbors().size(); i++){
-                        if(h.getNeighbors().get(i).getType().equals("desert") && h.getNeighbors().get(i).getSettlement() == null){
+                        if(h.getNeighbors().get(i).getType().equals("desert") && h.getNeighbors().get(i).getSettlement() != null && h.getNeighbors.get(i).getOwner().equals(p)){
                             h.highlight();
                             desertSettlements++;
                             break;

@@ -34,7 +34,7 @@ public class Harbor implements ExtraAction{
             for(Hex h: board.getAllHexes()){
                 if(h.getType().equals("water")  && h.getSettlement() == null){
                     for(int i = 0; i<h.getNeighbors().size(); i++){
-                        if(h.getNeighbors().get(i).getType().equals("water") && h.getNeighbors().get(i).getSettlement() == null){
+                        if(h.getNeighbors().get(i).getType().equals("water") && h.getNeighbors().get(i).getSettlement() == null && h.getNeighbors.get(i).getOwner().equals(p)){
                             h.highlight();
                             waterSettlements++;
                             break;

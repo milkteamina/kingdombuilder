@@ -34,11 +34,11 @@ public class Tavern implements ExtraAction{
         for(Hex h: board.getAllHexes()){
              if(h.getSettlement() == null){//looks at all the free hexes
               for(Hex i: h.getNeighbors()){
-                if(i.getSettlement() != null){ // starts the 3 settlement chain 
+                if(i.getSettlement() != null &&  i.getOwner().equals(p)){ // starts the 3 settlement chain 
                   for(Hex j: i.getNeighbors()){
-                    if(j.getSettlement() != null){ // checks for the second settlement
+                    if(j.getSettlement() != null && j.getOwner().equals(p)){ // checks for the second settlement
                         for(Hex k : j.getNeighbors()){
-                         if(k.getSettlement() != null){ //checks for a third connected settlement
+                         if(k.getSettlement() != null && k.getOwner().equals(p)){ //checks for a third connected settlement
                             if(h.isHighlighted()== false){
                                 h.highlight();
                             }

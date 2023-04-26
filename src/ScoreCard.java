@@ -38,7 +38,7 @@ public class ScoreCard {
                 for(Hex i : neighborHexes)
                     if(i.getType().equals("mountain"))
                         score += 1;
-                        //need to break here because it doesn't matter how many u are touching
+                        break;
             }
         }
         return score;
@@ -47,22 +47,18 @@ public class ScoreCard {
     public int merchantScore(Board board, Player player) {
         int score = 0;
         ArrayList<Hex> allHexes = board.getAllHexes();
-        ArrayList<Hex> playerHexies = new ArrayList<Hex>();
         ArrayList<Hex> urSoHexy = new ArrayList<Hex>();
 
         for(Hex x : allHexes) //part 1 - Getting an arraylist of locations that have a neighboring settlement owned by the player (to save on run time).
         {
-            if(x.getSettlement().getOwner().getId() == player.getId())
-                playerHexies.add(x);
-        }
-        for(Hex h : playerHexies)
-        {
-            ArrayList<Hex> tempNeighbors = h.getNeighbors();
-            for(Hex z : tempNeighbors)
+            String type = x.getType();
+            if(type.equals("city") || type.equals("oasis") || type.equals("paddock") || type.equals("tavern") || type.equals("harbor"))
             {
-                String type = z.getType();
-                if(type.equals("city") || type.equals("oasis") || type.equals("paddock") || type.equals("tavern") || type.equals("harbor"))
-                    urSoHexy.add(z);
+                for(Hex n : x.getNeighbors())
+                {
+                    if(n.getSettlement().getOwner().getId() == player.getId())
+                        urSoHexy.add(x);
+                }
             }
         }
 
@@ -73,28 +69,25 @@ public class ScoreCard {
 
         for(Hex hix : urSoHexy)
         {
+            if(!connected) {
+                visited.clear();
+                connected = isConnected(board, player, hix, urSoHexy); 
+            }
             if(connected)
             {
                 score+=4;
                 connected = false;
             }
-            for(Hex hox : urSoHexy)
-                if(!connected)
-                    if(!hox.equals(hix))
-                    {
-                        visited.clear();
-                        connected = isConnected(board, player, hix, urSoHexy);
-                    }
         }
         return score;
     }
     private ArrayList<Hex> visited = new ArrayList<Hex>();
 
-    public boolean isConnected(Board b, Player p, Hex location1, ArrayList<Hex> otherSettlements) //extention to merchantScore to get recursion working
+    public boolean isConnected(Board b, Player p, Hex location, ArrayList<Hex> otherSettlements) //extention to merchantScore to get recursion working
     {
-        ArrayList<Hex> neighbors = location1.getNeighbors();
+        ArrayList<Hex> neighbors = location.getNeighbors();
 
-        visited.add(location1);
+        visited.add(location);
         for(Hex neighbor : neighbors)
         {
             if(!visited.contains(neighbor)) {

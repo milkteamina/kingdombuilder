@@ -31,11 +31,7 @@ public class Board {
 
     private ArrayList<Hex> allHexes;
     public Hex[][] hexes;
-    private BufferedImage boardImageQuadrant1;
-    private BufferedImage boardImageQuadrant2;
-    private BufferedImage boardImageQuadrant3;
-    private BufferedImage boardImageQuadrant4;
-    private ArrayList<BufferedImage> images;
+    private ArrayList<BufferedImage> images = new ArrayList();
 
 
     /*
@@ -69,35 +65,28 @@ public class Board {
             ArrayList<String> quadrants = new ArrayList(); 
             for(int m = 0; m < 4; m++) {
             int rand = (int)(Math.random()*(4-m)); 
-
-            if(quads.get(rand) == 1) {while(sc1.hasNext()) quadrants.add(sc1.next()); images.add(boardImageQuadrant1);}
-            if(quads.get(rand) == 2) {while(sc2.hasNext()) quadrants.add(sc2.next()); images.add(boardImageQuadrant2);}
-            if(quads.get(rand) == 3) {while(sc3.hasNext()) quadrants.add(sc3.next()); images.add(boardImageQuadrant3);} 
-            if(quads.get(rand) == 4) {while(sc4.hasNext()) quadrants.add(sc4.next()); images.add(boardImageQuadrant4);}
+            if(quads.get(rand) == 1) {while(sc1.hasNext()) quadrants.add(sc1.next()); images.add(ImageIO.read(Board.class.getResource("/Images/KingdomBuilderBoard_Quadrant1.png")));}
+            if(quads.get(rand) == 2) {while(sc2.hasNext()) quadrants.add(sc2.next()); images.add(ImageIO.read(Board.class.getResource("/Images/KingdomBuilderBoard_Quadrant2.png")));}
+            if(quads.get(rand) == 3) {while(sc3.hasNext()) quadrants.add(sc3.next()); images.add(ImageIO.read(Board.class.getResource("/Images/KingdomBuilderBoard_Quadrant3.png")));} 
+            if(quads.get(rand) == 4) {while(sc4.hasNext()) quadrants.add(sc4.next()); images.add(ImageIO.read(Board.class.getResource("/Images/KingdomBuilderBoard_Quadrant4.png")));}
             quads.remove(rand);}
 
             allHexes = new ArrayList<>();
             hexes = new Hex[20][40];
 
-            boardImageQuadrant1 = ImageIO.read(Board.class.getResource("/Images/KingdomBuilderBoard_Quadrant1.png"));
-            boardImageQuadrant2 = ImageIO.read(Board.class.getResource("/Images/KingdomBuilderBoard_Quadrant2.png"));
-            boardImageQuadrant3 = ImageIO.read(Board.class.getResource("/Images/KingdomBuilderBoard_Quadrant3.png"));
-            boardImageQuadrant4 = ImageIO.read(Board.class.getResource("/Images/KingdomBuilderBoard_Quadrant4.png"));
-
             int[] tempPointsX = new int[6];
             int[] tempPointsY = new int[6];
             int position = 0;
+            boolean change = true;
 
-            for(int i = 0; i < 20; i++){
+            for(int i = 0; i < 20; i++) {
                 for(int j = 0; j < 40; j += 2){
-
                     if(i % 2 == 1 && j == 0) j += 1;
 
                     for (int k = 0; k < 6; k++){
                         tempPointsX[k] = startPointsX[k] + offSetMarginX * (i % 2) + hexagonShiftX * j / 2;
                         tempPointsY[k] = startPointsY[k] + i * hexagonShiftY;
                     }
-
                     switch (quadrants.get(position)) {
                         case "0" -> hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "desert");
                         case "1" -> hexes[i][j] = new BasicHex(tempPointsX, tempPointsY, null, "water");
@@ -112,9 +101,23 @@ public class Board {
                         case "10" -> hexes[i][j] = new ExtraActionHex(tempPointsX, tempPointsY, null, "tavern");
                         case "11" -> hexes[i][j] = new ExtraActionHex(tempPointsX, tempPointsY, null, "harbor");
                     }
-                    position++;
+                    if(position==199)
+                    	position+=100;
+                    if(position%10 == 9 && change) {
+                    	position+=90;
+                    	change = !change; }
 
+                    else if(position%10 == 9 && !change) {
+                    	position-=100;
+                    	change = !change; }
+                    position++;
                 }
+                /*for(Hex[] h : hexes)
+                	for(Hex x : h)
+                		if(x == null)
+                			System.out.println("null");
+                		else
+                			System.out.println(x.getType());*/
             }
 
             /*
@@ -210,10 +213,10 @@ public class Board {
 
     public void drawBoard(Graphics g){
         //draw image of board
-        g.drawImage(images.get(2), boardX, boardY, BOARD_QUADRANT_SIZE_X, BOARD_QUADRANT_SIZE_Y, null);
+        g.drawImage(images.get(0), boardX, boardY, BOARD_QUADRANT_SIZE_X, BOARD_QUADRANT_SIZE_Y, null);
         g.drawImage(images.get(1), boardX + BOARD_QUADRANT_SIZE_X - boardAdjustX, boardY, BOARD_QUADRANT_SIZE_X, BOARD_QUADRANT_SIZE_Y, null);
-        g.drawImage(images.get(3), boardX, boardY + BOARD_QUADRANT_SIZE_Y - boardAdjustY, BOARD_QUADRANT_SIZE_X, BOARD_QUADRANT_SIZE_Y, null);
-        g.drawImage(images.get(4), boardX + BOARD_QUADRANT_SIZE_X - boardAdjustX, boardY + BOARD_QUADRANT_SIZE_Y - boardAdjustY, BOARD_QUADRANT_SIZE_X, BOARD_QUADRANT_SIZE_Y, null);
+        g.drawImage(images.get(2), boardX, boardY + BOARD_QUADRANT_SIZE_Y - boardAdjustY, BOARD_QUADRANT_SIZE_X, BOARD_QUADRANT_SIZE_Y, null);
+        g.drawImage(images.get(3), boardX + BOARD_QUADRANT_SIZE_X - boardAdjustX, boardY + BOARD_QUADRANT_SIZE_Y - boardAdjustY, BOARD_QUADRANT_SIZE_X, BOARD_QUADRANT_SIZE_Y, null);
 
 
         for(int i = 0; i < allHexes.size(); i++){
